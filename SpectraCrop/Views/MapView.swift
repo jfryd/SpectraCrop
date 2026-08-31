@@ -17,10 +17,6 @@ struct MapView: View {
     @State private var region: MKCoordinateRegion
     @State private var selectedReading: Reading?
     
-    // For map interactions
-    @State private var position: MapCameraPosition = .automatic
-    @State private var mapSelection: UUID?
-    
     init() {
         // Default to a reasonable region
         let center = CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)
@@ -32,30 +28,16 @@ struct MapView: View {
     }
     
     var body: some View {
-        Map(position: $position, selection: $mapSelection) {
-            // Show user location if available
-            if let userLocation = locationManager.currentLocation {
-                Marker("Your Location", coordinate: userLocation)
-                    .tint(.blue)
-            }
-            
-            // Show all readings with locations
-            ForEach(dataManager.readings.filter { $0.location != nil }) { reading in
-                if let location = reading.location {
-                    Annotation(coordinate: location) {
-                        ReadingMapMarker(
-                            reading: reading,
-                            isSelected: mapSelection == reading.id
-                        )
-                    }
-                    .tag(reading.id)
+        Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: true, annotationItems: annotationItems) { reading in
+            MapAnnotation(coordinate: reading.location!) {
+                ReadingMapMarker(
+                    reading: reading,
+                    isSelected: selectedReading?.id == reading.id
+                )
+                .onTapGesture {
+                    selectedReading = reading
                 }
             }
-        }
-        .mapControls {
-            MapUserLocationButton()
-            MapCompass()
-            MapScaleView()
         }
         .navigationTitle("Map")
         .toolbar {
@@ -63,11 +45,11 @@ struct MapView: View {
                 Button {
                     // Center on user location
                     if let userLocation = locationManager.currentLocation {
-                        position = .region(MKCoordinateRegion(
+                        region = MKCoordinateRegion(
                             center: userLocation,
                             latitudinalMeters: 1000,
                             longitudinalMeters: 1000
-                        ))
+                        )
                     }
                 } label: {
                     Image(systemName: "location.fill")
@@ -77,21 +59,23 @@ struct MapView: View {
         .onAppear {
             // Try to center on user location
             if let userLocation = locationManager.currentLocation {
-                position = .region(MKCoordinateRegion(
+                region = MKCoordinateRegion(
                     center: userLocation,
                     latitudinalMeters: 1000,
                     longitudinalMeters: 1000
-                ))
+                )
             }
         }
-        .sheet(item: $mapSelection) { readingId in
-            if let reading = dataManager.readings.first(where: { $0.id == readingId }) {
-                NavigationStack {
-                    ReadingDetailView(reading: reading)
-                        .environmentObject(dataManager)
-                }
+        .sheet(item: $selectedReading) { reading in
+            NavigationStack {
+                ReadingDetailView(reading: reading)
+                    .environmentObject(dataManager)
             }
         }
+    }
+    
+    private var annotationItems: [Reading] {
+        dataManager.readings.filter { $0.location != nil }
     }
 }
 
