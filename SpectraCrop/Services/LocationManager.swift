@@ -57,7 +57,7 @@ final class LocationManager: NSObject, LocationManagerProtocol, ObservableObject
     }
     
     private func checkAuthorization() {
-        let status = locationManager.authorizationStatus()
+        let status = CLLocationManager.authorizationStatus()
         
         DispatchQueue.main.async {
             switch status {
@@ -81,7 +81,7 @@ final class LocationManager: NSObject, LocationManagerProtocol, ObservableObject
         isRequesting = true
         error = nil
         
-        let status = locationManager.authorizationStatus()
+        let status = CLLocationManager.authorizationStatus()
         
         switch status {
         case .authorizedWhenInUse, .authorizedAlways:

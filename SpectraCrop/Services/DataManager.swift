@@ -256,17 +256,26 @@ class MockDataManager: DataManagerProtocol, ObservableObject {
     
     func initialize() {
         // Load mock data
-        readings = (0..<10).map { index in
-            Reading(
-                recordedAt: Calendar.current.date(byAdding: .day, value: -index, to: Date())!,
-                description: "Reading \(index + 1)",
-                f0: UInt16(100 + index * 10),
-                fMax: UInt16(500 + index * 20),
-                timeToFMax: Int(1000 + index * 100),
-                fvDivFMax: Double(0.7 + Double(index) * 0.01),
-                vj: Double(1.0 + Double(index) * 0.1),
-                m0: Double(2.0 + Double(index) * 0.1),
-                pi: Double(3.0 + Double(index) * 0.1),
+        readings = (0..<10).map { index -> Reading in
+            let recordedAt = Calendar.current.date(byAdding: .day, value: -index, to: Date())!
+            let description = "Reading \(index + 1)"
+            let f0 = UInt16(100 + index * 10)
+            let fMax = UInt16(500 + index * 20)
+            let timeToFMax = Int(1000 + index * 100)
+            let fvDivFMax = Double(0.7 + Double(index) * 0.01)
+            let vj = Double(1.0 + Double(index) * 0.1)
+            let m0 = Double(2.0 + Double(index) * 0.1)
+            let pi = Double(3.0 + Double(index) * 0.1)
+            return Reading(
+                recordedAt: recordedAt,
+                description: description,
+                f0: f0,
+                fMax: fMax,
+                timeToFMax: timeToFMax,
+                fvDivFMax: fvDivFMax,
+                vj: vj,
+                m0: m0,
+                pi: pi,
                 qualityFailed: false
             )
         }
