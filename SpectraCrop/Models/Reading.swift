@@ -11,7 +11,7 @@ import SwiftUI
 
 // MARK: - Reading Model
 
-struct Reading: Identifiable, Codable, Equatable {
+struct Reading: Identifiable, Codable {
     let id: UUID
     var externalId: String?
     var recordedAt: Date
