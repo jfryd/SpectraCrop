@@ -6,7 +6,5 @@
 	<array>
 		<string>bluetooth-central</string>
 	</array>
-	<key>com.apple.developer.core-location</key>
-	<array/>
 </dict>
 </plist>
