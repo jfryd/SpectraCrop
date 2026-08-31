@@ -69,6 +69,7 @@ final class BluetoothManager: NSObject, BluetoothManagerProtocol, ObservableObje
     
     private var centralManager: CBCentralManager!
     private var dataCharacteristic: CBCharacteristic?
+    private var writeCharacteristic: CBCharacteristic?
     private var responseData = Data()
     private var expectedLength = 0
     private var waitingForResponse = false
@@ -186,6 +187,7 @@ final class BluetoothManager: NSObject, BluetoothManagerProtocol, ObservableObje
         for characteristic in characteristics {
             if characteristic.uuid == dataWriteUUID {
                 // This is the write characteristic
+                writeCharacteristic = characteristic
             } else if characteristic.uuid == dataNotifyUUID {
                 // This is the notify characteristic
                 dataCharacteristic = characteristic
@@ -234,9 +236,9 @@ final class BluetoothManager: NSObject, BluetoothManagerProtocol, ObservableObje
     }
     
     func sendData(_ data: Data) {
-        guard let connectedDevice = connectedDevice else { return }
+        guard let connectedDevice = connectedDevice, let writeCharacteristic = writeCharacteristic else { return }
         
-        connectedDevice.peripheral.writeValue(data, for: dataWriteUUID, type: .withResponse)
+        connectedDevice.peripheral.writeValue(data, for: writeCharacteristic, type: .withResponse)
     }
     
     // MARK: - Data Handling
@@ -295,8 +297,8 @@ class MockBluetoothManager: BluetoothManagerProtocol, ObservableObject {
     func startScan() {
         isScanning = true
         devices = [
-            BluetoothDevice(peripheral: CBPeripheral(), rssi: -50),
-            BluetoothDevice(peripheral: CBPeripheral(), rssi: -70)
+            BluetoothDevice(peripheral: MockCBPeripheral(), rssi: -50),
+            BluetoothDevice(peripheral: MockCBPeripheral(), rssi: -70)
         ]
     }
     
@@ -318,7 +320,14 @@ class MockBluetoothManager: BluetoothManagerProtocol, ObservableObject {
 
 // Mock CBPeripheral for testing
 class MockCBPeripheral: CBPeripheral {
-    override var identifier: UUID { UUID() }
+    private let _identifier: UUID
+    
+    override init() {
+        _identifier = UUID()
+        super.init()
+    }
+    
+    override var identifier: UUID { _identifier }
     override var name: String? { "Mock SpectraCrop" }
 }
 #endif
