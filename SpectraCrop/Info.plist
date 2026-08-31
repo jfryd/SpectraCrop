@@ -33,7 +33,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>View photos from your library for app features.</string>
 	<key>NSPrivacyPolicyURL</key>
-	<string>https://github.com/your-org/spectracrop/blob/main/PRIVACY_POLICY.md</string>
+	<string>https://spectracrop.com/forside/privacy-policy/</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Titillium-Bold.otf</string>
