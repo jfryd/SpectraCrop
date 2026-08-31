@@ -84,8 +84,7 @@ struct ReadingListView: View {
         .sheet(isPresented: $isShowingFilter) {
             NavigationStack {
                 ReadingFilterView(
-                    sortOrder: $sortOrder,
-                    onDismiss: { isShowingFilter = false }
+                    sortOrder: $sortOrder
                 )
             }
         }
@@ -131,7 +130,9 @@ struct ReadingListView: View {
         case .locationNearest:
             return readings.sorted { reading1, reading2 in
                 guard let loc1 = reading1.location, let loc2 = reading2.location else { return false }
-                return loc1.distance(from: currentLocation) < loc2.distance(from: currentLocation)
+                let location1 = CLLocation(latitude: loc1.latitude, longitude: loc1.longitude)
+                let location2 = CLLocation(latitude: loc2.latitude, longitude: loc2.longitude)
+                return location1.distance(from: currentLocation) < location2.distance(from: currentLocation)
             }
         }
     }
@@ -191,7 +192,7 @@ private struct SyncSection: View {
                     ProgressView()
                     Text("Syncing...")
                 } else if let lastSync = dataManager.lastSyncDate {
-                    Text("Last sync: \(lastSync, formatter: dateFormatter)")
+                    Text("Last sync: \(lastSync, formatter: Self.dateFormatter)")
                 } else {
                     Text("Not synced yet")
                 }
