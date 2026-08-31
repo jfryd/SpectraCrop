@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import CoreBluetooth
+import Combine
 
 // MARK: - BluetoothDevice
 
