@@ -129,7 +129,7 @@ private struct ReadingMapMarker: View {
 struct ReadingDetailView: View {
     let reading: Reading
     @EnvironmentObject var dataManager: DataManager
-    @Environment(\dismiss) private var dismiss
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         ScrollView {

@@ -156,7 +156,7 @@ struct LoginView: View {
 
 struct RegisterView: View {
     @EnvironmentObject var authManager: AuthManager
-    @Environment(\dismiss) private var dismiss
+    @Environment(\.dismiss) private var dismiss
     @State private var username = ""
     @State private var password = ""
     @State private var confirmPassword = ""

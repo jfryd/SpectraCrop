@@ -266,7 +266,7 @@ struct ReadingRowView: View {
 
 struct ReadingFilterView: View {
     @Binding var sortOrder: ReadingSort
-    @Environment(\dismiss) private var dismiss
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         Form {

@@ -184,7 +184,7 @@ private struct StatView: View {
 
 struct SettingsView: View {
     @EnvironmentObject var authManager: AuthManager
-    @Environment(\dismiss) private var dismiss
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         List {

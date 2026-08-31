@@ -194,7 +194,7 @@ private struct LocationSection: View {
 struct NewManualReadingView: View {
     @EnvironmentObject var dataManager: DataManager
     @EnvironmentObject var locationManager: LocationManager
-    @Environment(\dismiss) private var dismiss
+    @Environment(\.dismiss) private var dismiss
     
     @State private var description = ""
     @State private var useCurrentLocation = false
@@ -343,7 +343,7 @@ struct NewAutomaticReadingView: View {
     @EnvironmentObject var dataManager: DataManager
     @EnvironmentObject var bluetoothManager: BluetoothManager
     @EnvironmentObject var locationManager: LocationManager
-    @Environment(\dismiss) private var dismiss
+    @Environment(\.dismiss) private var dismiss
     
     @State private var description = ""
     @State private var useCurrentLocation = true
