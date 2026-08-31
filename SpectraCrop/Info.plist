@@ -4,18 +4,53 @@
 <dict>
 	<key>CFBundleDisplayName</key>
 	<string>SpectraCrop</string>
-	<key>CFBundleName</key>
-	<string>SpectraCrop</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.spectracrop.ios</string>
+	<key>CFBundleName</key>
+	<string>SpectraCrop</string>
 	<key>CFBundleShortVersionString</key>
 	<string>2.0.0</string>
 	<key>CFBundleVersion</key>
 	<string>2.0.0.0</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
 	<string>16.0</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>We use Bluetooth to connect to the SpectraCrop hardware device and receive spectral measurements.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>We use Bluetooth to connect to the SpectraCrop hardware device and receive spectral measurements.</string>
+	<key>NSBluetoothWhileInUseUsageDescription</key>
+	<string>The app needs access to Bluetooth to connect to the measurement device</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Tag readings with your current location for geospatial analysis and mapping.</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Tag readings with your current location for geospatial analysis and mapping.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Tag readings with your current location for geospatial analysis and mapping.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>View photos from your library for app features.</string>
+	<key>NSPrivacyPolicyURL</key>
+	<string>https://github.com/your-org/spectracrop/blob/main/PRIVACY_POLICY.md</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Titillium-Bold.otf</string>
+		<string>Titillium-Regular.otf</string>
+		<string>Titillium-Thin.otf</string>
+	</array>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+		<key>UISceneConfigurations</key>
+		<dict/>
+	</dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>bluetooth-central</string>
+	</array>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
@@ -25,6 +60,8 @@
 	<array>
 		<string>arm64</string>
 	</array>
+	<key>UIRequiresFullScreen</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -41,42 +78,7 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
-	<key>UIRequiresFullScreen</key>
-	<true/>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>bluetooth-central</string>
-	</array>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Titillium-Bold.otf</string>
-		<string>Titillium-Regular.otf</string>
-		<string>Titillium-Thin.otf</string>
-	</array>
-	<key>NSPrivacyPolicyURL</key>
-	<string>https://github.com/your-org/spectracrop/blob/main/PRIVACY_POLICY.md</string>
 	<key>kTCCServiceMediaLibrary</key>
 	<string>Show images from library</string>
-	<key>NSLocationUsageDescription</key>
-	<string>Tag readings with your current location for geospatial analysis and mapping.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>View photos from your library for app features.</string>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Tag readings with your current location for geospatial analysis and mapping.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Tag readings with your current location for geospatial analysis and mapping.</string>
-	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>We use Bluetooth to connect to the SpectraCrop hardware device and receive spectral measurements.</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>We use Bluetooth to connect to the SpectraCrop hardware device and receive spectral measurements.</string>
-	<key>UIApplicationSceneManifest</key>
-	<dict>
-		<key>UIApplicationSupportsMultipleScenes</key>
-		<false/>
-		<key>UISceneConfigurations</key>
-		<dict/>
-	</dict>
 </dict>
 </plist>

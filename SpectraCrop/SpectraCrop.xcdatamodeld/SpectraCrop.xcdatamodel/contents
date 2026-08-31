@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="ReadingEntity" representedClassName="ReadingEntity" syncable="YES" codeGenerationType="class">
+    <entity name="ReadingEntity" representedClassName="ReadingEntity" syncable="YES" codeGenerationType="manual">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="externalId" optional="YES" attributeType="String" usesScalarValueType="NO"/>
         <attribute name="recordedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
