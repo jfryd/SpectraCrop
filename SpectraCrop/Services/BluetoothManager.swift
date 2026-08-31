@@ -14,7 +14,7 @@ import Combine
 
 struct BluetoothDevice: Identifiable {
     let id: UUID
-    let peripheral: CBPeripheral
+    let peripheral: CBPeripheral?
     let name: String
     let identifier: UUID
     var rssi: Int
@@ -30,6 +30,18 @@ struct BluetoothDevice: Identifiable {
         self.isConnected = false
         self.isConnecting = false
     }
+    
+    #if DEBUG
+    init(mockName: String, mockIdentifier: UUID, rssi: Int) {
+        self.id = UUID()
+        self.peripheral = nil
+        self.name = mockName
+        self.identifier = mockIdentifier
+        self.rssi = rssi
+        self.isConnected = false
+        self.isConnecting = false
+    }
+    #endif
 }
 
 // MARK: - BluetoothManager Protocol
@@ -297,8 +309,8 @@ class MockBluetoothManager: BluetoothManagerProtocol, ObservableObject {
     func startScan() {
         isScanning = true
         devices = [
-            BluetoothDevice(peripheral: MockCBPeripheral(), rssi: -50),
-            BluetoothDevice(peripheral: MockCBPeripheral(), rssi: -70)
+            BluetoothDevice(mockName: "Mock SpectraCrop 1", mockIdentifier: UUID(), rssi: -50),
+            BluetoothDevice(mockName: "Mock SpectraCrop 2", mockIdentifier: UUID(), rssi: -70)
         ]
     }
     
@@ -316,18 +328,5 @@ class MockBluetoothManager: BluetoothManagerProtocol, ObservableObject {
     }
     
     func sendData(_ data: Data) {}
-}
-
-// Mock CBPeripheral for testing
-class MockCBPeripheral: CBPeripheral {
-    private let _identifier: UUID
-    
-    override init() {
-        _identifier = UUID()
-        super.init()
-    }
-    
-    override var identifier: UUID { _identifier }
-    override var name: String? { "Mock SpectraCrop" }
 }
 #endif
