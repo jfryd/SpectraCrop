@@ -52,15 +52,15 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             .foregroundColor: UIColor.label,
             .font: UIFont.systemFont(ofSize: 20, weight: .semibold)
         ]
-        UINavigationBar.standardAppearance = navBarAppearance
-        UINavigationBar.compactAppearance = navBarAppearance
-        UINavigationBar.scrollEdgeAppearance = navBarAppearance
+        UINavigationBar.appearance().standardAppearance = navBarAppearance
+        UINavigationBar.appearance().compactAppearance = navBarAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
         
         // Tab bar appearance
         let tabBarAppearance = UITabBarAppearance()
         tabBarAppearance.configureWithOpaqueBackground()
         tabBarAppearance.backgroundColor = .systemBackground
-        UITabBar.standardAppearance = tabBarAppearance
+        UITabBar.appearance().standardAppearance = tabBarAppearance
         
         // Button appearance
         UIButton.appearance().tintColor = .systemBlue
