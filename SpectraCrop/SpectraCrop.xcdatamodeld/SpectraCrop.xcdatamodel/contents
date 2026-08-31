@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ReadingEntity" representedClassName="ReadingEntity" syncable="YES" codeGenerationType="manual">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="externalId" optional="YES" attributeType="String" usesScalarValueType="NO"/>
+        <attribute name="recordedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="syncTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="deletedTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="readingDescription" optional="YES" attributeType="String" usesScalarValueType="NO"/>
+        <attribute name="latitude" optional="NO" attributeType="Double" usesScalarValueType="YES"/>
+        <attribute name="longitude" optional="NO" attributeType="Double" usesScalarValueType="YES"/>
+        <attribute name="altitude" optional="NO" attributeType="Double" usesScalarValueType="YES"/>
+        <attribute name="f0" optional="NO" attributeType="Integer 32" usesScalarValueType="YES"/>
+        <attribute name="fMax" optional="NO" attributeType="Integer 32" usesScalarValueType="YES"/>
+        <attribute name="timeToFMax" optional="NO" attributeType="Integer 32" usesScalarValueType="YES"/>
+        <attribute name="fvDivFMax" optional="NO" attributeType="Double" usesScalarValueType="YES"/>
+        <attribute name="vj" optional="NO" attributeType="Double" usesScalarValueType="YES"/>
+        <attribute name="m0" optional="NO" attributeType="Double" usesScalarValueType="YES"/>
+        <attribute name="pi" optional="NO" attributeType="Double" usesScalarValueType="YES"/>
+        <attribute name="ppPredict" optional="YES" attributeType="Double" usesScalarValueType="YES"/>
+        <attribute name="absoluteDifference" optional="YES" attributeType="Double" usesScalarValueType="YES"/>
+        <attribute name="covariance" optional="YES" attributeType="Double" usesScalarValueType="YES"/>
+        <attribute name="correlation" optional="YES" attributeType="Double" usesScalarValueType="YES"/>
+        <attribute name="qualityFailed" optional="NO" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" usesScalarValueType="NO"/>
+    </entity>
+    <elements>
+        <element name="ReadingEntity" positionX="100" positionY="100" width="200" height="150"/>
+    </elements>
+</model>
