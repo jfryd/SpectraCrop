@@ -1,4 +1,4 @@
-// !$*UTF8*$!
+// !$*UTF8*$
 {
 	archiveVersion = 1;
 	classes = {
@@ -6,45 +6,117 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		010000000000000000000000 /* SpectraCropApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010000000000000000000001 /* SpectraCropApp.swift */; };
+		010000000000000000000002 /* Reading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010000000000000000000003 /* Reading.swift */; };
+		010000000000000000000004 /* SyncModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010000000000000000000005 /* SyncModels.swift */; };
+		010000000000000000000006 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010000000000000000000007 /* User.swift */; };
+		010000000000000000000008 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010000000000000000000009 /* APIClient.swift */; };
+		01000000000000000000000A /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01000000000000000000000B /* AuthManager.swift */; };
+		01000000000000000000000C /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01000000000000000000000D /* BluetoothManager.swift */; };
+		01000000000000000000000E /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01000000000000000000000F /* DataManager.swift */; };
+		010000000000000000000010 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010000000000000000000011 /* LocationManager.swift */; };
+		010000000000000000000012 /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010000000000000000000013 /* DeviceInfo.swift */; };
+		010000000000000000000014 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010000000000000000000015 /* PersistenceController.swift */; };
+		010000000000000000000016 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010000000000000000000017 /* RootView.swift */; };
+		010000000000000000000018 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010000000000000000000019 /* MapView.swift */; };
+		01000000000000000000001A /* NewReadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01000000000000000000001B /* NewReadingView.swift */; };
+		01000000000000000000001C /* ReadingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01000000000000000000001D /* ReadingListView.swift */; };
+		01000000000000000000001E /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01000000000000000000001F /* UserProfileView.swift */; };
+		010000000000000000000020 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 010000000000000000000021 /* Info.plist */; };
+		010000000000000000000022 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 010000000000000000000023 /* Assets.xcassets */; };
+		010000000000000000000024 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 010000000000000000000025 /* PrivacyInfo.xcprivacy */; };
+		010000000000000000000026 /* SpectraCrop.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 010000000000000000000027 /* SpectraCrop.xcdatamodeld */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		010000000000000000000001 /* SpectraCropApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpectraCropApp.swift; path = ../SpectraCrop/SpectraCropApp.swift; sourceTree = "<group>"; };
+		010000000000000000000003 /* Reading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Reading.swift; path = ../SpectraCrop/Models/Reading.swift; sourceTree = "<group>"; };
+		010000000000000000000005 /* SyncModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SyncModels.swift; path = ../SpectraCrop/Models/SyncModels.swift; sourceTree = "<group>"; };
+		010000000000000000000007 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = ../SpectraCrop/Models/User.swift; sourceTree = "<group>"; };
+		010000000000000000000009 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIClient.swift; path = ../SpectraCrop/Services/APIClient.swift; sourceTree = "<group>"; };
+		01000000000000000000000B /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthManager.swift; path = ../SpectraCrop/Services/AuthManager.swift; sourceTree = "<group>"; };
+		01000000000000000000000D /* BluetoothManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BluetoothManager.swift; path = ../SpectraCrop/Services/BluetoothManager.swift; sourceTree = "<group>"; };
+		01000000000000000000000F /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataManager.swift; path = ../SpectraCrop/Services/DataManager.swift; sourceTree = "<group>"; };
+		010000000000000000000011 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationManager.swift; path = ../SpectraCrop/Services/LocationManager.swift; sourceTree = "<group>"; };
+		010000000000000000000013 /* DeviceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceInfo.swift; path = ../SpectraCrop/Utilities/DeviceInfo.swift; sourceTree = "<group>"; };
+		010000000000000000000015 /* PersistenceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersistenceController.swift; path = ../SpectraCrop/Utilities/PersistenceController.swift; sourceTree = "<group>"; };
+		010000000000000000000017 /* RootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RootView.swift; path = ../SpectraCrop/Views/RootView.swift; sourceTree = "<group>"; };
+		010000000000000000000019 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapView.swift; path = ../SpectraCrop/Views/MapView.swift; sourceTree = "<group>"; };
+		01000000000000000000001B /* NewReadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewReadingView.swift; path = ../SpectraCrop/Views/NewReadingView.swift; sourceTree = "<group>"; };
+		01000000000000000000001D /* ReadingListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReadingListView.swift; path = ../SpectraCrop/Views/ReadingListView.swift; sourceTree = "<group>"; };
+		01000000000000000000001F /* UserProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfileView.swift; path = ../SpectraCrop/Views/UserProfileView.swift; sourceTree = "<group>"; };
+		010000000000000000000021 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../SpectraCrop/Info.plist; sourceTree = "<group>"; };
+		010000000000000000000023 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../SpectraCrop/Assets.xcassets; sourceTree = "<group>"; };
+		010000000000000000000025 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xcprivacy; name = PrivacyInfo.xcprivacy; path = ../SpectraCrop/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		010000000000000000000027 /* SpectraCrop.xcdatamodeld */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; name = SpectraCrop.xcdatamodeld; path = ../SpectraCrop/SpectraCrop.xcdatamodeld; sourceTree = "<group>"; };
 		204D7F6D3046113A00706B61 /* SpectraCrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpectraCrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		204D7F7D3046113B00706B61 /* Exceptions for "SpectraCrop" folder in "SpectraCrop" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
+/* Begin PBXGroup section */
+		010000000000000000000028 /* SpectraCrop */ = {
+			isa = PBXGroup;
+			children = (
+				010000000000000000000029 /* Models */,
+				01000000000000000000002A /* Services */,
+				01000000000000000000002B /* Utilities */,
+				01000000000000000000002C /* Views */,
+				010000000000000000000001 /* SpectraCropApp.swift */,
+				010000000000000000000021 /* Info.plist */,
+				010000000000000000000023 /* Assets.xcassets */,
+				010000000000000000000025 /* PrivacyInfo.xcprivacy */,
+				010000000000000000000027 /* SpectraCrop.xcdatamodeld */,
 			);
-			target = 204D7F6C3046113A00706B61 /* SpectraCrop */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		204D7F6F3046113A00706B61 /* SpectraCrop */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				204D7F7D3046113B00706B61 /* Exceptions for "SpectraCrop" folder in "SpectraCrop" target */,
-			);
-			path = SpectraCrop;
+			name = SpectraCrop;
 			sourceTree = "<group>";
 		};
-/* End PBXFileSystemSynchronizedRootGroup section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		204D7F6A3046113A00706B61 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+		010000000000000000000029 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				010000000000000000000003 /* Reading.swift */,
+				010000000000000000000005 /* SyncModels.swift */,
+				010000000000000000000007 /* User.swift */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			name = Models;
+			sourceTree = "<group>";
 		};
-/* End PBXFrameworksBuildPhase section */
-
-/* Begin PBXGroup section */
+		01000000000000000000002A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				010000000000000000000009 /* APIClient.swift */,
+				01000000000000000000000B /* AuthManager.swift */,
+				01000000000000000000000D /* BluetoothManager.swift */,
+				01000000000000000000000F /* DataManager.swift */,
+				010000000000000000000011 /* LocationManager.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		01000000000000000000002B /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				010000000000000000000013 /* DeviceInfo.swift */,
+				010000000000000000000015 /* PersistenceController.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		01000000000000000000002C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				010000000000000000000017 /* RootView.swift */,
+				010000000000000000000019 /* MapView.swift */,
+				01000000000000000000001B /* NewReadingView.swift */,
+				01000000000000000000001D /* ReadingListView.swift */,
+				01000000000000000000001F /* UserProfileView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		204D7F643046113A00706B61 = {
 			isa = PBXGroup;
 			children = (
-				204D7F6F3046113A00706B61 /* SpectraCrop */,
+				010000000000000000000028 /* SpectraCrop */,
 				204D7F6E3046113A00706B61 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -72,12 +144,7 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				204D7F6F3046113A00706B61 /* SpectraCrop */,
-			);
 			name = SpectraCrop;
-			packageProductDependencies = (
-			);
 			productName = SpectraCrop;
 			productReference = 204D7F6D3046113A00706B61 /* SpectraCrop.app */;
 			productType = "com.apple.product-type.application";
@@ -98,6 +165,7 @@
 				};
 			};
 			buildConfigurationList = 204D7F683046113A00706B61 /* Build configuration list for PBXProject "SpectraCrop" */;
+			compatibilityVersion = "Xcode 26.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -105,9 +173,6 @@
 				Base,
 			);
 			mainGroup = 204D7F643046113A00706B61;
-			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
-			productRefGroup = 204D7F6E3046113A00706B61 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -121,6 +186,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				010000000000000000000022 /* Assets.xcassets in Resources */,
+				010000000000000000000024 /* PrivacyInfo.xcprivacy in Resources */,
+				010000000000000000000026 /* SpectraCrop.xcdatamodeld in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +199,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				010000000000000000000000 /* SpectraCropApp.swift in Sources */,
+				010000000000000000000002 /* Reading.swift in Sources */,
+				010000000000000000000004 /* SyncModels.swift in Sources */,
+				010000000000000000000006 /* User.swift in Sources */,
+				010000000000000000000008 /* APIClient.swift in Sources */,
+				01000000000000000000000A /* AuthManager.swift in Sources */,
+				01000000000000000000000C /* BluetoothManager.swift in Sources */,
+				01000000000000000000000E /* DataManager.swift in Sources */,
+				010000000000000000000010 /* LocationManager.swift in Sources */,
+				010000000000000000000012 /* DeviceInfo.swift in Sources */,
+				010000000000000000000014 /* PersistenceController.swift in Sources */,
+				010000000000000000000016 /* RootView.swift in Sources */,
+				010000000000000000000018 /* MapView.swift in Sources */,
+				01000000000000000000001A /* NewReadingView.swift in Sources */,
+				01000000000000000000001C /* ReadingListView.swift in Sources */,
+				01000000000000000000001E /* UserProfileView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,6 +224,7 @@
 		204D7F7F3046113B00706B61 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ../SpectraCrop/SpectraCrop.entitlements;
@@ -149,23 +234,15 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ../SpectraCrop/Info.plist;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
-					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = SpectraCrop.SpectraCrop;
+				MARKETING_VERSION = 2.0.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.spectracrop.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -174,6 +251,7 @@
 		204D7F803046113B00706B61 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ../SpectraCrop/SpectraCrop.entitlements;
@@ -183,145 +261,18 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ../SpectraCrop/Info.plist;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
-					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = SpectraCrop.SpectraCrop;
+				MARKETING_VERSION = 2.0.0;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.spectracrop.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		204D7F813046113B00706B61 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 883DCT2A7L;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-			};
-			name = Debug;
-		};
-		204D7F823046113B00706B61 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 883DCT2A7L;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -332,8 +283,8 @@
 		204D7F683046113A00706B61 /* Build configuration list for PBXProject "SpectraCrop" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				204D7F813046113B00706B61 /* Debug */,
-				204D7F823046113B00706B61 /* Release */,
+				204D7F7F3046113B00706B61 /* Debug */,
+				204D7F803046113B00706B61 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -348,6 +299,7 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-	};
-	rootObject = 204D7F653046113A00706B61 /* Project object */;
+
+		rootObject = 204D7F653046113A00706B61 /* Project object */;
+	}
 }
