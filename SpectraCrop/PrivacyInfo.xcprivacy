@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- ======================================================================== -->
+    <!-- PRIVACY MANIFEST FILE FOR SPECTRACROP APP -->
+    <!-- Required by Apple since May 1, 2024 -->
+    <!-- ======================================================================== -->
+    
+    <!-- DATA COLLECTED BY THE APP -->
+    <key>NSPrivacyCollectedDataTypes</key>
+    <array>
+        <!-- USER ACCOUNT DATA -->
+        <dict>
+            <key>NSPrivacyCollectedDataType</key>
+            <string>NSPrivacyCollectedDataTypeUserID</string>
+            <key>NSPrivacyCollectedDataTypeLinked</key>
+            <true/>
+            <key>NSPrivacyCollectedDataTypeTracking</key>
+            <false/>
+            <key>NSPrivacyCollectedDataTypePurposes</key>
+            <array>
+                <string>NSPrivacyCollectedDataTypePurposeAccountManagement</string>
+            </array>
+        </dict>
+        
+        <!-- USERNAME -->
+        <dict>
+            <key>NSPrivacyCollectedDataType</key>
+            <string>NSPrivacyCollectedDataTypeUsername</string>
+            <key>NSPrivacyCollectedDataTypeLinked</key>
+            <true/>
+            <key>NSPrivacyCollectedDataTypeTracking</key>
+            <false/>
+            <key>NSPrivacyCollectedDataTypePurposes</key>
+            <array>
+                <string>NSPrivacyCollectedDataTypePurposeAccountManagement</string>
+            </array>
+        </dict>
+        
+        <!-- PASSWORD (HASHED) -->
+        <dict>
+            <key>NSPrivacyCollectedDataType</key>
+            <string>NSPrivacyCollectedDataTypePassword</string>
+            <key>NSPrivacyCollectedDataTypeLinked</key>
+            <true/>
+            <key>NSPrivacyCollectedDataTypeTracking</key>
+            <false/>
+            <key>NSPrivacyCollectedDataTypePurposes</key>
+            <array>
+                <string>NSPrivacyCollectedDataTypePurposeAppFunctionality</string>
+            </array>
+        </dict>
+        
+        <!-- DEVICE IDENTIFIER -->
+        <dict>
+            <key>NSPrivacyCollectedDataType</key>
+            <string>NSPrivacyCollectedDataTypeDeviceID</string>
+            <key>NSPrivacyCollectedDataTypeLinked</key>
+            <true/>
+            <key>NSPrivacyCollectedDataTypeTracking</key>
+            <false/>
+            <key>NSPrivacyCollectedDataTypePurposes</key>
+            <array>
+                <string>NSPrivacyCollectedDataTypePurposeAppFunctionality</string>
+                <string>NSPrivacyCollectedDataTypePurposeFraudPrevention</string>
+            </array>
+        </dict>
+        
+        <!-- PRECISE LOCATION -->
+        <dict>
+            <key>NSPrivacyCollectedDataType</key>
+            <string>NSPrivacyCollectedDataTypePreciseLocation</string>
+            <key>NSPrivacyCollectedDataTypeLinked</key>
+            <true/>
+            <key>NSPrivacyCollectedDataTypeTracking</key>
+            <false/>
+            <key>NSPrivacyCollectedDataTypePurposes</key>
+            <array>
+                <string>NSPrivacyCollectedDataTypePurposeAppFunctionality</string>
+            </array>
+        </dict>
+        
+        <!-- COARSE LOCATION -->
+        <dict>
+            <key>NSPrivacyCollectedDataType</key>
+            <string>NSPrivacyCollectedDataTypeCoarseLocation</string>
+            <key>NSPrivacyCollectedDataTypeLinked</key>
+            <true/>
+            <key>NSPrivacyCollectedDataTypeTracking</key>
+            <false/>
+            <key>NSPrivacyCollectedDataTypePurposes</key>
+            <array>
+                <string>NSPrivacyCollectedDataTypePurposeAppFunctionality</string>
+            </array>
+        </dict>
+        
+        <!-- BLUETOOTH DATA -->
+        <dict>
+            <key>NSPrivacyCollectedDataType</key>
+            <string>NSPrivacyCollectedDataTypeBluetoothData</string>
+            <key>NSPrivacyCollectedDataTypeLinked</key>
+            <true/>
+            <key>NSPrivacyCollectedDataTypeTracking</key>
+            <false/>
+            <key>NSPrivacyCollectedDataTypePurposes</key>
+            <array>
+                <string>NSPrivacyCollectedDataTypePurposeAppFunctionality</string>
+                <string>NSPrivacyCollectedDataTypePurposeDeviceManagement</string>
+            </array>
+        </dict>
+        
+        <!-- USAGE DATA -->
+        <dict>
+            <key>NSPrivacyCollectedDataType</key>
+            <string>NSPrivacyCollectedDataTypeProductInteraction</string>
+            <key>NSPrivacyCollectedDataTypeLinked</key>
+            <true/>
+            <key>NSPrivacyCollectedDataTypeTracking</key>
+            <false/>
+            <key>NSPrivacyCollectedDataTypePurposes</key>
+            <array>
+                <string>NSPrivacyCollectedDataTypePurposeAppFunctionality</string>
+                <string>NSPrivacyCollectedDataTypePurposeAnalytics</string>
+            </array>
+        </dict>
+        
+        <!-- DIAGNOSTICS -->
+        <dict>
+            <key>NSPrivacyCollectedDataType</key>
+            <string>NSPrivacyCollectedDataTypeDiagnostics</string>
+            <key>NSPrivacyCollectedDataTypeLinked</key>
+            <false/>
+            <key>NSPrivacyCollectedDataTypeTracking</key>
+            <false/>
+            <key>NSPrivacyCollectedDataTypePurposes</key>
+            <array>
+                <string>NSPrivacyCollectedDataTypePurposeAppFunctionality</string>
+            </array>
+        </dict>
+    </array>
+    
+    <!-- NO TRACKING -->
+    <key>NSPrivacyTrackingDomains</key>
+    <array>
+        <!-- Empty array means no tracking -->
+    </array>
+    
+    <!-- APP USES NON-EXEMPT ENCRYPTION -->
+    <key>ITSAppUsesNonExemptEncryption</key>
+    <false/>
+    
+    <!-- ======================================================================== -->
+    <!-- REQUIRED REASON APIs -->
+    <!-- Declare APIs that require privacy manifest if used for tracking -->
+    <!-- ======================================================================== -->
+    
+    <!-- BLUETOOTH USAGE -->
+    <key>NSBluetoothAlwaysUsageDescription</key>
+    <string>We use Bluetooth to connect to the SpectraCrop hardware device and receive spectral measurements.</string>
+    
+    <!-- LOCATION USAGE -->
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Tag readings with your current location for geospatial analysis and mapping.</string>
+    
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>Tag readings with your current location for geospatial analysis and mapping.</string>
+    
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Tag readings with your current location for geospatial analysis and mapping.</string>
+    
+    <!-- NOTES -->
+    <key>NSPrivacyManifestNote</key>
+    <string>
+        This privacy manifest declares all data collected by the SpectraCrop App.
+        
+        Data Types:
+        - Device ID: Used to associate readings with a specific device
+        - Location: Optional, attached to readings for mapping
+        - Bluetooth Data: Required to connect to hardware
+        - User Account: Required for sync and account management
+        - Usage Data: App interaction data for functionality and analytics
+        
+        No data is used for tracking or advertising purposes.
+        No data is shared with third parties for marketing.
+        All data is used solely for app functionality.
+    </string>
+</dict>
+</plist>
