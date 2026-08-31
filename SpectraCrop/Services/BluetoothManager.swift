@@ -231,7 +231,7 @@ final class BluetoothManager: NSObject, BluetoothManagerProtocol, ObservableObje
     }
     
     func connect(to device: BluetoothDevice) {
-        guard isEnabled, !device.isConnected, !device.isConnecting else { return }
+        guard isEnabled, !device.isConnected, !device.isConnecting, let peripheral = device.peripheral else { return }
         
         DispatchQueue.main.async {
             if let index = self.devices.firstIndex(where: { $0.id == device.id }) {
@@ -239,18 +239,18 @@ final class BluetoothManager: NSObject, BluetoothManagerProtocol, ObservableObje
             }
         }
         
-        centralManager.connect(device.peripheral, options: nil)
+        centralManager.connect(peripheral, options: nil)
     }
     
     func disconnect() {
-        guard let connectedDevice = connectedDevice else { return }
-        centralManager.cancelPeripheralConnection(connectedDevice.peripheral)
+        guard let connectedDevice = connectedDevice, let peripheral = connectedDevice.peripheral else { return }
+        centralManager.cancelPeripheralConnection(peripheral)
     }
     
     func sendData(_ data: Data) {
-        guard let connectedDevice = connectedDevice, let writeCharacteristic = writeCharacteristic else { return }
+        guard let connectedDevice = connectedDevice, let peripheral = connectedDevice.peripheral, let writeCharacteristic = writeCharacteristic else { return }
         
-        connectedDevice.peripheral.writeValue(data, for: writeCharacteristic, type: .withResponse)
+        peripheral.writeValue(data, for: writeCharacteristic, type: .withResponse)
     }
     
     // MARK: - Data Handling
