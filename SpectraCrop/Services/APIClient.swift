@@ -104,6 +104,14 @@ final class APIClient: APIClientProtocol {
     }
     
     private func decodeError(data: Data, statusCode: Int) -> APIError {
+        // First, try to decode the custom server error format {"Code": number}
+        if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+           let serverCode = json["Code"] as? Int {
+            let serverMessage = json["Message"] as? String ?? "Server error"
+            return APIError(code: serverCode, message: serverMessage)
+        }
+        
+        // Then try to decode as APIError
         do {
             let decoder = JSONDecoder()
             let errorResponse = try decoder.decode(APIError.self, from: data)

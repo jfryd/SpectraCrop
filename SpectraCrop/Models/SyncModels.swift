@@ -152,10 +152,32 @@ struct APIError: Codable, Error {
     let message: String
     let details: String?
     
+    // CodingKeys to handle server's JSON format ("Code", "Message")
+    private enum CodingKeys: String, CodingKey {
+        case code = "Code"
+        case message = "Message"
+        case details = "Details"
+    }
+    
     init(code: Int, message: String, details: String? = nil) {
         self.code = code
         self.message = message
         self.details = details
+    }
+    
+    // Provide user-friendly error description
+    var localizedDescription: String {
+        if code == 92 {
+            return "Server authentication error. Please check your credentials."
+        } else if code == 93 {
+            return "Server unavailable. Please try again later."
+        } else if code == 120 {
+            return "This account may already exist or have restrictions. Please try a different username."
+        } else if code >= 500 {
+            return "Server error: " + message
+        } else {
+            return message
+        }
     }
 }
 
