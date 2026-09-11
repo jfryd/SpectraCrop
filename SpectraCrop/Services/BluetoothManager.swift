@@ -31,7 +31,7 @@ struct BluetoothDevice: Identifiable {
         self.isConnecting = false
     }
     
-    #if DEBUG
+    // Mock initializer for previews and testing
     init(mockName: String, mockIdentifier: UUID, rssi: Int) {
         self.id = UUID()
         self.peripheral = nil
@@ -41,7 +41,6 @@ struct BluetoothDevice: Identifiable {
         self.isConnected = false
         self.isConnecting = false
     }
-    #endif
 }
 
 // MARK: - BluetoothManager Protocol
