@@ -76,8 +76,20 @@ final class APIClient: APIClientProtocol {
     // MARK: - Request Execution
     
     private func executeRequest<T: Decodable>(_ request: URLRequest, responseType: T.Type) async throws -> T {
+        // Log request for debugging
+        print("DEBUG: Request URL: \{request.url?.absoluteString ?? "nil"}\")
+        print("DEBUG: Request headers: \{request.allHTTPHeaderFields?.map { "\{$0.key}: \{$0.value}" }.joined(separator: ", ") ?? "nil"}\")
+        if let body = request.httpBody, let bodyString = String(data: body, encoding: .utf8) {
+            print("DEBUG: Request body: \{bodyString)\")
+        }
+        
         do {
             let (data, response) = try await session.data(for: request)
+            
+            // Log response status
+            if let httpResponse = response as? HTTPURLResponse {
+                print("DEBUG: Response status: \{httpResponse.statusCode}\")
+            }
             
             // Check for HTTP errors
             guard let httpResponse = response as? HTTPURLResponse else {
@@ -104,6 +116,13 @@ final class APIClient: APIClientProtocol {
     }
     
     private func decodeError(data: Data, statusCode: Int) -> APIError {
+        // Log raw response for debugging
+        if let rawString = String(data: data, encoding: .utf8) {
+            print("DEBUG: Server error response (status: \{statusCode}): \{rawString})\")
+        } else {
+            print("DEBUG: Server error response (status: \{statusCode}), data size: \{data.count}) bytes\")
+        }
+        
         // First, try to decode the custom server error format {"Code": number}
         if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
            let serverCode = json["Code"] as? Int {
