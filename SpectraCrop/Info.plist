@@ -32,8 +32,6 @@
 	<string>Tag readings with your current location for geospatial analysis and mapping.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Tag readings with your current location for geospatial analysis and mapping.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>View photos from your library for app features.</string>
 	<key>NSPrivacyPolicyURL</key>
 	<string>https://spectracrop.com/forside/privacy-policy/</string>
 	<key>UIAppFonts</key>
@@ -80,7 +78,20 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
-	<key>kTCCServiceMediaLibrary</key>
-	<string>Show images from library</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>siriu5.dk</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<false/>
+				<key>NSExceptionMinimumTLSVersion</key>
+				<string>TLSv1.2</string>
+			</dict>
+		</dict>
+	</dict>
 </dict>
 </plist>

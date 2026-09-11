@@ -41,7 +41,8 @@ final class APIClient: APIClientProtocol {
     private var commonHeaders: [String: String] {
         var headers = [
             "Content-Type": "application/json",
-            "Accept": "application/json"
+            "Accept": "application/json",
+            "User-Agent": "PostmanRuntime/7.56.1"
         ]
         
         // Add device ID

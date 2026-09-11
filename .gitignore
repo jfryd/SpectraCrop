@@ -138,3 +138,9 @@ config/*.plist
 
 node_modules/
 npm-debug.log*
+
+# ========================================================================
+# Local Data Folders
+# ========================================================================
+
+siriu5-jlorenzen-spectracrop-app2-b076a169fbab/
