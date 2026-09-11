@@ -296,7 +296,6 @@ enum BluetoothError: Error {
 
 // MARK: - Mock BluetoothManager for Testing
 
-#if DEBUG
 class MockBluetoothManager: BluetoothManagerProtocol, ObservableObject {
     @Published var devices: [BluetoothDevice] = []
     @Published var connectedDevice: BluetoothDevice?
@@ -329,4 +328,3 @@ class MockBluetoothManager: BluetoothManagerProtocol, ObservableObject {
     
     func sendData(_ data: Data) {}
 }
-#endif

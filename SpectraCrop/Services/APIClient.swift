@@ -208,7 +208,6 @@ final class APIClient: APIClientProtocol {
 
 // MARK: - Mock APIClient for Testing
 
-#if DEBUG
 class MockAPIClient: APIClientProtocol {
     func login(username: String, password: String) async throws -> User {
         return User(id: UUID(), username: username, sessionId: UUID().uuidString)
@@ -234,4 +233,3 @@ class MockAPIClient: APIClientProtocol {
         return PageDTO(items: [], totalCount: 0, hasMore: false)
     }
 }
-#endif

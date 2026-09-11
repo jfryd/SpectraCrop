@@ -245,7 +245,6 @@ final class DataManager: DataManagerProtocol, ObservableObject {
 
 // MARK: - Mock DataManager for Testing
 
-#if DEBUG
 class MockDataManager: DataManagerProtocol, ObservableObject {
     @Published var readings: [Reading] = []
     @Published var isLoading = false
@@ -301,4 +300,3 @@ class MockDataManager: DataManagerProtocol, ObservableObject {
     
     func refreshReadings() async {}
 }
-#endif

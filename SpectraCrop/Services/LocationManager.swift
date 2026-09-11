@@ -144,7 +144,6 @@ enum LocationError: Error {
 
 // MARK: - Mock LocationManager for Testing
 
-#if DEBUG
 class MockLocationManager: LocationManagerProtocol, ObservableObject {
     @Published var currentLocation: CLLocationCoordinate2D?
     @Published var isRequesting = false
@@ -170,4 +169,3 @@ class MockLocationManager: LocationManagerProtocol, ObservableObject {
     
     func stopMonitoring() {}
 }
-#endif

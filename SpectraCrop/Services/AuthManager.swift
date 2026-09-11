@@ -195,7 +195,6 @@ final class AuthManager: AuthManagerProtocol, ObservableObject {
 
 // MARK: - Mock AuthManager for Testing
 
-#if DEBUG
 class MockAuthManager: AuthManagerProtocol, ObservableObject {
     @Published var currentUser: User?
     @Published var isLoading = false
@@ -235,4 +234,3 @@ class MockAuthManager: AuthManagerProtocol, ObservableObject {
         }
     }
 }
-#endif
