@@ -48,6 +48,13 @@ struct UserDTO: Codable {
     let username: String
     let sessionId: String
     
+    // CodingKeys to handle server's PascalCase JSON format
+    private enum CodingKeys: String, CodingKey {
+        case id = "Id"
+        case username = "Username"
+        case sessionId = "SessionId"
+    }
+    
     // Convert to User model
     func toUser() -> User {
         return User(
