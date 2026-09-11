@@ -147,7 +147,7 @@ struct SyncResponse: Codable {
 
 // MARK: - API Error
 
-struct APIError: Codable, Error {
+struct APIError: Codable, LocalizedError {
     let code: Int
     let message: String
     let details: String?
