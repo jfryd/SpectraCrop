@@ -33,6 +33,7 @@ struct ReadingListView: View {
                     isSelected: selectedReadings.contains(reading.id)
                 )
                 .onTapGesture {
+                    HapticFeedback.selection()
                     toggleSelection(for: reading)
                 }
             }
@@ -55,18 +56,22 @@ struct ReadingListView: View {
             ToolbarItemGroup(placement: .topBarTrailing) {
                 if !selectedReadings.isEmpty {
                     Button(role: .destructive) {
+                        HapticFeedback.light()
                         isShowingDeleteAlert = true
                     } label: {
                         Image(systemName: "trash")
+                            .foregroundColor(.primaryRed)
                     }
                 }
             }
             
             ToolbarItemGroup(placement: .topBarLeading) {
                 Button {
+                    HapticFeedback.light()
                     isShowingFilter = true
                 } label: {
                     Image(systemName: "line.3.horizontal.decrease.circle")
+                        .foregroundColor(.primaryBlue)
                 }
             }
         }
@@ -76,6 +81,7 @@ struct ReadingListView: View {
         .alert("Delete Readings", isPresented: $isShowingDeleteAlert) {
             Button("Cancel", role: .cancel) {}
             Button("Delete", role: .destructive) {
+                HapticFeedback.warning()
                 deleteSelectedReadings()
             }
         } message: {
@@ -200,11 +206,13 @@ private struct SyncSection: View {
                 Spacer()
                 
                 Button {
+                    HapticFeedback.light()
                     Task {
                         await dataManager.syncReadings()
                     }
                 } label: {
                     Image(systemName: "arrow.clockwise")
+                        .foregroundColor(.primaryBlue)
                 }
             }
         }
@@ -243,7 +251,7 @@ struct ReadingRowView: View {
                 if let description = reading.description, !description.isEmpty {
                     Text(description)
                         .font(.subheadline)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(.textSecondary)
                         .lineLimit(1)
                 }
             }

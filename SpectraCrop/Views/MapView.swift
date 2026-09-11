@@ -43,6 +43,7 @@ struct MapView: View {
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
                 Button {
+                    HapticFeedback.light()
                     // Center on user location
                     if let userLocation = locationManager.currentLocation {
                         region = MKCoordinateRegion(
@@ -53,6 +54,7 @@ struct MapView: View {
                     }
                 } label: {
                     Image(systemName: "location.fill")
+                        .foregroundColor(.primaryBlue)
                 }
             }
         }

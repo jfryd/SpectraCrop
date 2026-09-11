@@ -99,26 +99,34 @@ struct LoginView: View {
                 TextField("Username", text: $username)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
+                    .textFieldStyle(.roundedBorder)
                 
                 SecureField("Password", text: $password)
+                    .textFieldStyle(.roundedBorder)
             }
             
             if let errorMessage = errorMessage {
                 Section {
                     Text(errorMessage)
-                        .foregroundColor(.red)
+                        .foregroundColor(.primaryRed)
                 }
             }
             
             Section {
                 Button("Login") {
+                    HapticFeedback.light()
                     login()
                 }
                 .disabled(username.isEmpty || password.isEmpty || isLoading)
+                .buttonStyle(.borderedProminent)
+                .tint(.primaryBlue)
                 
                 Button("Create Account") {
+                    HapticFeedback.light()
                     isShowingRegister = true
                 }
+                .buttonStyle(.bordered)
+                .tint(.primaryBlue)
             }
         }
         .navigationTitle("SpectraCrop")
@@ -169,24 +177,30 @@ struct RegisterView: View {
                 TextField("Username", text: $username)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
+                    .textFieldStyle(.roundedBorder)
                 
                 SecureField("Password", text: $password)
+                    .textFieldStyle(.roundedBorder)
                 
                 SecureField("Confirm Password", text: $confirmPassword)
+                    .textFieldStyle(.roundedBorder)
             }
             
             if let errorMessage = errorMessage {
                 Section {
                     Text(errorMessage)
-                        .foregroundColor(.red)
+                        .foregroundColor(.primaryRed)
                 }
             }
             
             Section {
                 Button("Create Account") {
+                    HapticFeedback.light()
                     register()
                 }
                 .disabled(username.isEmpty || password.isEmpty || confirmPassword.isEmpty || isLoading)
+                .buttonStyle(.borderedProminent)
+                .tint(.primaryBlue)
             }
         }
         .navigationTitle("Create Account")
@@ -194,6 +208,7 @@ struct RegisterView: View {
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button("Cancel") {
+                    HapticFeedback.light()
                     dismiss()
                 }
             }

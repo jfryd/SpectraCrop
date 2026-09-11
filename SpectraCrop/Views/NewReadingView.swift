@@ -32,21 +32,25 @@ struct NewReadingView: View {
             // Action Buttons
             VStack(spacing: 16) {
                 Button {
+                    HapticFeedback.light()
                     isShowingManual = true
                 } label: {
                     Label("Manual Entry", systemImage: "pencil")
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
+                .tint(.primaryBlue)
                 .controlSize(.large)
                 
                 Button {
+                    HapticFeedback.light()
                     isShowingAutomatic = true
                 } label: {
                     Label("From Device", systemImage: "antenna.radiowaves.left.and.right")
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.bordered)
+                .tint(.primaryBlue)
                 .controlSize(.large)
                 .disabled(!bluetoothManager.isEnabled || bluetoothManager.connectedDevice == nil)
             }
@@ -93,13 +97,13 @@ private struct BluetoothDeviceSection: View {
                 Spacer()
                 
                 if bluetoothManager.isScanning {
-                    ProgressView()
-                } else if let error = bluetoothManager.error {
+                    LoadingView(style: .small)
+                } else if let _ = bluetoothManager.error {
                     Image(systemName: "exclamationmark.triangle.fill")
-                        .foregroundColor(.red)
+                        .foregroundColor(.primaryRed)
                 } else if bluetoothManager.connectedDevice != nil {
                     Image(systemName: "checkmark.circle.fill")
-                        .foregroundColor(.green)
+                        .foregroundColor(.qualityGood)
                 }
             }
             
@@ -112,17 +116,18 @@ private struct BluetoothDeviceSection: View {
                         Image(systemName: "signal")
                         Text("Signal: \(device.rssi) dBm")
                             .font(.caption)
-                            .foregroundColor(.secondary)
+                            .foregroundColor(.textSecondary)
                     }
                 }
                 .padding(.horizontal, 12)
                 .padding(.vertical, 8)
-                .background(Color(.systemBackground))
+                .background(Color.cardBackground)
                 .cornerRadius(8)
             } else if !bluetoothManager.devices.isEmpty {
                 VStack(alignment: .leading) {
                     ForEach(bluetoothManager.devices) { device in
                         Button {
+                            HapticFeedback.selection()
                             bluetoothManager.connect(to: device)
                         } label: {
                             HStack {
@@ -131,7 +136,7 @@ private struct BluetoothDeviceSection: View {
                                 
                                 Text("\(device.rssi) dBm")
                                     .font(.caption)
-                                    .foregroundColor(.secondary)
+                                    .foregroundColor(.textSecondary)
                             }
                         }
                         .buttonStyle(.bordered)
@@ -141,16 +146,17 @@ private struct BluetoothDeviceSection: View {
             } else if !bluetoothManager.isEnabled {
                 Text("Bluetooth is disabled")
                     .font(.subheadline)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.textSecondary)
             } else {
                 Text("No devices found")
                     .font(.subheadline)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.textSecondary)
             }
         }
         .padding()
-        .background(Color(.secondarySystemBackground))
+        .background(Color.cardBackground)
         .cornerRadius(12)
+        .cardShadow()
     }
 }
 
@@ -170,7 +176,7 @@ private struct LocationSection: View {
                 
                 if let _ = locationManager.currentLocation, useCurrentLocation {
                     Image(systemName: "checkmark.circle.fill")
-                        .foregroundColor(.green)
+                        .foregroundColor(.qualityGood)
                 }
             }
             
@@ -180,12 +186,13 @@ private struct LocationSection: View {
             if !locationManager.isEnabled {
                 Text("Enable location permissions in Settings")
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.textSecondary)
             }
         }
         .padding()
-        .background(Color(.secondarySystemBackground))
+        .background(Color.cardBackground)
         .cornerRadius(12)
+        .cardShadow()
     }
 }
 
@@ -280,7 +287,7 @@ struct NewManualReadingView: View {
             if let errorMessage = errorMessage {
                 Section {
                     Text(errorMessage)
-                        .foregroundColor(.red)
+                        .foregroundColor(.primaryRed)
                 }
             }
             
@@ -367,17 +374,17 @@ struct NewAutomaticReadingView: View {
                     } else {
                         Text("Connected")
                             .font(.subheadline)
-                            .foregroundColor(.green)
+                            .foregroundColor(.qualityGood)
                     }
                 }
                 .frame(maxWidth: .infinity)
                 .padding()
-                .background(Color(.systemBackground))
+                .background(Color.cardBackground)
                 .cornerRadius(12)
             } else {
                 Text("Not connected to device")
                     .font(.headline)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.textSecondary)
             }
             
             Spacer()

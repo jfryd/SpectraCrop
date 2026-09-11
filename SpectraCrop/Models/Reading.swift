@@ -236,11 +236,11 @@ extension Reading {
     
     var qualityColor: Color {
         if qualitySuccess {
-            return .green
+            return .qualityGood
         } else if qualityFailed == true {
-            return .red
+            return .qualityPoor
         } else {
-            return .orange
+            return .qualityFair
         }
     }
 }

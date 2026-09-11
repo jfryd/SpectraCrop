@@ -22,7 +22,7 @@ struct SpectraCropApp: App {
                 .environmentObject(dataManager)
                 .environmentObject(bluetoothManager)
                 .environmentObject(locationManager)
-                .preferredColorScheme(.light)
+                // Removed .preferredColorScheme(.light) to support Dark Mode
         }
     }
 }
