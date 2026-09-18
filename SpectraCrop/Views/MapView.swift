@@ -14,18 +14,17 @@ struct MapView: View {
     @EnvironmentObject var dataManager: DataManager
     @EnvironmentObject var locationManager: LocationManager
     
-    @State private var cameraPosition: MapCameraPosition
+    @State private var region: MKCoordinateRegion
     @State private var selectedReading: Reading?
     
     init() {
         // Default to a reasonable region
         let center = CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)
-        let region = MKCoordinateRegion(
+        _region = State(initialValue: MKCoordinateRegion(
             center: center,
             latitudinalMeters: 1000,
             longitudinalMeters: 1000
-        )
-        _cameraPosition = State(initialValue: .region(region))
+        ))
     }
     
     var body: some View {
@@ -33,22 +32,19 @@ struct MapView: View {
             Color.appBackground
                 .edgesIgnoringSafeArea(.all)
             
-            Map(position: $cameraPosition, interactionModes: .all) {
-                ForEach(annotationItems, id: \.id) { reading in
-                    Annotation(coordinate: reading.location!) {
-                        ReadingMapMarker(
-                            reading: reading,
-                            isSelected: selectedReading?.id == reading.id
-                        )
-                        .glassCardStyle()
-                        .onTapGesture {
-                            HapticFeedback.selection()
-                            selectedReading = reading
-                        }
+            Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: true, annotationItems: annotationItems) { reading in
+                Annotation(coordinate: reading.location!) {
+                    ReadingMapMarker(
+                        reading: reading,
+                        isSelected: selectedReading?.id == reading.id
+                    )
+                    .glassCardStyle()
+                    .onTapGesture {
+                        HapticFeedback.selection()
+                        selectedReading = reading
                     }
                 }
             }
-            .mapShowsUserLocation(true)
         }
         .navigationTitle("Map")
         .toolbar {
