@@ -167,16 +167,32 @@ struct APIError: Codable, LocalizedError {
     
     // Provide user-friendly error description
     var localizedDescription: String {
-        if code == 92 {
+        // Use details if available for more specific error information
+        let detailMessage = details ?? message
+        
+        // Handle known server error codes
+        if code == 1 {
+            return "Registration failed. This username may already exist. Please try a different username."
+        } else if code == 92 {
             return "Server authentication error. Please check your credentials."
         } else if code == 93 {
             return "Server unavailable. Please try again later."
         } else if code == 120 {
             return "This account may already exist or have restrictions. Please try a different username."
+        }
+        // Handle common HTTP status codes
+        else if code == 401 {
+            return "Authentication failed. Please check your username and password."
+        } else if code == 403 {
+            return "Access denied. You do not have permission to perform this action."
+        } else if code == 404 {
+            return "The requested resource was not found."
+        } else if code == 409 {
+            return "Conflict: This username already exists. Please choose a different username."
         } else if code >= 500 {
-            return "Server error: " + message
+            return "Server error: " + detailMessage
         } else {
-            return message
+            return detailMessage
         }
     }
 }
