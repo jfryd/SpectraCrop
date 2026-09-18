@@ -94,39 +94,48 @@ struct LoginView: View {
     @State private var errorMessage: String?
     
     var body: some View {
-        Form {
-            Section {
-                TextField("Username", text: $username)
-                    .autocapitalization(.none)
-                    .disableAutocorrection(true)
-                    .textFieldStyle(.roundedBorder)
+        ScrollView {
+            VStack(spacing: 20) {
+                VStack(spacing: 16) {
+                    TextField("Username", text: $username)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                        .textFieldStyle(.roundedBorder)
+                        .padding(.horizontal)
+                    
+                    SecureField("Password", text: $password)
+                        .textFieldStyle(.roundedBorder)
+                        .padding(.horizontal)
+                }
+                .padding(.top, 20)
                 
-                SecureField("Password", text: $password)
-                    .textFieldStyle(.roundedBorder)
-            }
-            
-            if let errorMessage = errorMessage {
-                Section {
+                if let errorMessage = errorMessage {
                     Text(errorMessage)
                         .foregroundColor(.primaryRed)
+                        .padding(.horizontal)
                 }
-            }
-            
-            Section {
-                Button("Login") {
-                    HapticFeedback.light()
-                    login()
-                }
-                .disabled(username.isEmpty || password.isEmpty || isLoading)
-                .buttonStyle(.borderedProminent)
-                .tint(.primaryBlue)
                 
-                Button("Create Account") {
-                    HapticFeedback.light()
-                    isShowingRegister = true
+                VStack(spacing: 16) {
+                    Button("Login") {
+                        HapticFeedback.light()
+                        login()
+                    }
+                    .disabled(username.isEmpty || password.isEmpty || isLoading)
+                    .buttonStyle(.borderedProminent)
+                    .tint(.primaryBlue)
+                    .padding(.horizontal)
+                    
+                    Button("Create Account") {
+                        HapticFeedback.light()
+                        isShowingRegister = true
+                    }
+                    .buttonStyle(.bordered)
+                    .tint(.primaryBlue)
+                    .padding(.horizontal)
                 }
-                .buttonStyle(.bordered)
-                .tint(.primaryBlue)
+                .padding(.bottom, 20)
+                
+                Spacer()
             }
         }
         .navigationTitle("SpectraCrop")
@@ -172,35 +181,44 @@ struct RegisterView: View {
     @State private var errorMessage: String?
     
     var body: some View {
-        Form {
-            Section {
-                TextField("Username", text: $username)
-                    .autocapitalization(.none)
-                    .disableAutocorrection(true)
-                    .textFieldStyle(.roundedBorder)
+        ScrollView {
+            VStack(spacing: 20) {
+                VStack(spacing: 16) {
+                    TextField("Username", text: $username)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                        .textFieldStyle(.roundedBorder)
+                        .padding(.horizontal)
+                    
+                    SecureField("Password", text: $password)
+                        .textFieldStyle(.roundedBorder)
+                        .padding(.horizontal)
+                    
+                    SecureField("Confirm Password", text: $confirmPassword)
+                        .textFieldStyle(.roundedBorder)
+                        .padding(.horizontal)
+                }
+                .padding(.top, 20)
                 
-                SecureField("Password", text: $password)
-                    .textFieldStyle(.roundedBorder)
-                
-                SecureField("Confirm Password", text: $confirmPassword)
-                    .textFieldStyle(.roundedBorder)
-            }
-            
-            if let errorMessage = errorMessage {
-                Section {
+                if let errorMessage = errorMessage {
                     Text(errorMessage)
                         .foregroundColor(.primaryRed)
+                        .padding(.horizontal)
                 }
-            }
-            
-            Section {
-                Button("Create Account") {
-                    HapticFeedback.light()
-                    register()
+                
+                VStack(spacing: 16) {
+                    Button("Create Account") {
+                        HapticFeedback.light()
+                        register()
+                    }
+                    .disabled(username.isEmpty || password.isEmpty || confirmPassword.isEmpty || isLoading)
+                    .buttonStyle(.borderedProminent)
+                    .tint(.primaryBlue)
+                    .padding(.horizontal)
                 }
-                .disabled(username.isEmpty || password.isEmpty || confirmPassword.isEmpty || isLoading)
-                .buttonStyle(.borderedProminent)
-                .tint(.primaryBlue)
+                .padding(.bottom, 20)
+                
+                Spacer()
             }
         }
         .navigationTitle("Create Account")

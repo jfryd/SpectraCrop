@@ -222,81 +222,131 @@ struct NewManualReadingView: View {
     @State private var errorMessage: String?
     
     var body: some View {
-        Form {
-            Section(header: Text("Description")) {
-                TextField("Description (Optional)", text: $description)
-            }
-            
-            Section(header: Text("Location")) {
-                Toggle("Use Current Location", isOn: $useCurrentLocation)
-                    .onChange(of: useCurrentLocation) { newValue in
-                        if newValue {
-                            Task {
-                                await locationManager.requestLocation()
+        ScrollView {
+            VStack(spacing: 20) {
+                // Description Section
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Description")
+                        .font(.headline)
+                        .padding(.horizontal)
+                    
+                    TextField("Description (Optional)", text: $description)
+                        .textFieldStyle(.roundedBorder)
+                        .padding(.horizontal)
+                }
+                
+                // Location Section
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Location")
+                        .font(.headline)
+                        .padding(.horizontal)
+                    
+                    Toggle("Use Current Location", isOn: $useCurrentLocation)
+                        .padding(.horizontal)
+                        .onChange(of: useCurrentLocation) { newValue in
+                            if newValue {
+                                Task {
+                                    await locationManager.requestLocation()
+                                }
                             }
                         }
-                    }
-                
-                if useCurrentLocation, let location = locationManager.currentLocation {
-                    HStack {
-                        Text("Latitude")
-                        Spacer()
-                        Text(String(format: "%.6f", location.latitude))
-                    }
                     
-                    HStack {
-                        Text("Longitude")
-                        Spacer()
-                        Text(String(format: "%.6f", location.longitude))
+                    if useCurrentLocation, let location = locationManager.currentLocation {
+                        VStack(alignment: .leading, spacing: 4) {
+                            HStack {
+                                Text("Latitude")
+                                Spacer()
+                                Text(String(format: "%.6f", location.latitude))
+                            }
+                            .padding(.horizontal)
+                            
+                            HStack {
+                                Text("Longitude")
+                                Spacer()
+                                Text(String(format: "%.6f", location.longitude))
+                            }
+                            .padding(.horizontal)
+                        }
+                    } else {
+                        VStack(alignment: .leading, spacing: 4) {
+                            TextField("Latitude", value: $latitude, format: .number)
+                                .keyboardType(.decimalPad)
+                                .textFieldStyle(.roundedBorder)
+                                .padding(.horizontal)
+                            
+                            TextField("Longitude", value: $longitude, format: .number)
+                                .keyboardType(.decimalPad)
+                                .textFieldStyle(.roundedBorder)
+                                .padding(.horizontal)
+                            
+                            TextField("Altitude", value: $altitude, format: .number)
+                                .keyboardType(.decimalPad)
+                                .textFieldStyle(.roundedBorder)
+                                .padding(.horizontal)
+                        }
                     }
-                } else {
-                    TextField("Latitude", value: $latitude, format: .number)
-                        .keyboardType(.decimalPad)
-                    
-                    TextField("Longitude", value: $longitude, format: .number)
-                        .keyboardType(.decimalPad)
-                    
-                    TextField("Altitude", value: $altitude, format: .number)
-                        .keyboardType(.decimalPad)
                 }
-            }
-            
-            Section(header: Text("Spectral Data")) {
-                TextField("F0", text: $f0)
-                    .keyboardType(.numberPad)
                 
-                TextField("FMax", text: $fMax)
-                    .keyboardType(.numberPad)
+                // Spectral Data Section
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Spectral Data")
+                        .font(.headline)
+                        .padding(.horizontal)
+                    
+                    VStack(alignment: .leading, spacing: 4) {
+                        TextField("F0", text: $f0)
+                            .keyboardType(.numberPad)
+                            .textFieldStyle(.roundedBorder)
+                            .padding(.horizontal)
+                        
+                        TextField("FMax", text: $fMax)
+                            .keyboardType(.numberPad)
+                            .textFieldStyle(.roundedBorder)
+                            .padding(.horizontal)
+                        
+                        TextField("Time to FMax (ms)", text: $timeToFMax)
+                            .keyboardType(.numberPad)
+                            .textFieldStyle(.roundedBorder)
+                            .padding(.horizontal)
+                        
+                        TextField("Fv/FMax", text: $fvDivFMax)
+                            .keyboardType(.decimalPad)
+                            .textFieldStyle(.roundedBorder)
+                            .padding(.horizontal)
+                        
+                        TextField("Vj", text: $vj)
+                            .keyboardType(.decimalPad)
+                            .textFieldStyle(.roundedBorder)
+                            .padding(.horizontal)
+                        
+                        TextField("M0", text: $m0)
+                            .keyboardType(.decimalPad)
+                            .textFieldStyle(.roundedBorder)
+                            .padding(.horizontal)
+                        
+                        TextField("PI", text: $pi)
+                            .keyboardType(.decimalPad)
+                            .textFieldStyle(.roundedBorder)
+                            .padding(.horizontal)
+                    }
+                }
                 
-                TextField("Time to FMax (ms)", text: $timeToFMax)
-                    .keyboardType(.numberPad)
-                
-                TextField("Fv/FMax", text: $fvDivFMax)
-                    .keyboardType(.decimalPad)
-                
-                TextField("Vj", text: $vj)
-                    .keyboardType(.decimalPad)
-                
-                TextField("M0", text: $m0)
-                    .keyboardType(.decimalPad)
-                
-                TextField("PI", text: $pi)
-                    .keyboardType(.decimalPad)
-            }
-            
-            if let errorMessage = errorMessage {
-                Section {
+                if let errorMessage = errorMessage {
                     Text(errorMessage)
                         .foregroundColor(.primaryRed)
+                        .padding(.horizontal)
                 }
-            }
-            
-            Section {
+                
                 Button("Save Reading") {
                     saveReading()
                 }
                 .disabled(isSaving)
-                .frame(maxWidth: .infinity)
+                .buttonStyle(.borderedProminent)
+                .tint(.primaryBlue)
+                .padding(.horizontal)
+                .padding(.bottom, 20)
+                
+                Spacer()
             }
         }
         .navigationTitle("Manual Reading")

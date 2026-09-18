@@ -278,22 +278,40 @@ struct ReadingFilterView: View {
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        Form {
-            Section(header: Text("Sort By")) {
-                ForEach(ReadingSort.allCases) { order in
-                    Button {
-                        sortOrder = order
-                        dismiss()
-                    } label: {
-                        HStack {
-                            Text(order.rawValue)
-                            Spacer()
-                            if sortOrder == order {
-                                Image(systemName: "checkmark")
+        ScrollView {
+            VStack(spacing: 20) {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Sort By")
+                        .font(.headline)
+                        .padding(.horizontal)
+                    
+                    VStack(spacing: 4) {
+                        ForEach(ReadingSort.allCases) { order in
+                            Button {
+                                sortOrder = order
+                                dismiss()
+                            } label: {
+                                HStack {
+                                    Text(order.rawValue)
+                                    Spacer()
+                                    if sortOrder == order {
+                                        Image(systemName: "checkmark")
+                                            .foregroundColor(.primaryBlue)
+                                    }
+                                }
+                                .padding(.horizontal)
+                                .padding(.vertical, 8)
+                                .contentShape(Rectangle())
                             }
+                            .buttonStyle(.plain)
+                            
+                            Divider()
+                                .padding(.horizontal)
                         }
                     }
                 }
+                
+                Spacer()
             }
         }
         .navigationTitle("Sort & Filter")
