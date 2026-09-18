@@ -249,7 +249,7 @@ struct NewManualReadingView: View {
                     
                     Toggle("Use Current Location", isOn: $useCurrentLocation)
                         .padding(.horizontal)
-                        .onChange(of: useCurrentLocation) { newValue in
+                        .onChange(of: useCurrentLocation) { _, newValue in
                             if newValue {
                                 Task {
                                     await locationManager.requestLocation()

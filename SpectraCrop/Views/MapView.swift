@@ -32,16 +32,18 @@ struct MapView: View {
             Color.appBackground
                 .edgesIgnoringSafeArea(.all)
             
-            Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: true, annotationItems: annotationItems) { reading in
-                MapAnnotation(coordinate: reading.location!) {
-                    ReadingMapMarker(
-                        reading: reading,
-                        isSelected: selectedReading?.id == reading.id
-                    )
-                    .glassCardStyle()
-                    .onTapGesture {
-                        HapticFeedback.selection()
-                        selectedReading = reading
+            Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: true) {
+                ForEach(annotationItems, id: \.id) { reading in
+                    Annotation(coordinate: reading.location!) {
+                        ReadingMapMarker(
+                            reading: reading,
+                            isSelected: selectedReading?.id == reading.id
+                        )
+                        .glassCardStyle()
+                        .onTapGesture {
+                            HapticFeedback.selection()
+                            selectedReading = reading
+                        }
                     }
                 }
             }
