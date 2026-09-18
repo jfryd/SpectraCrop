@@ -32,7 +32,7 @@ struct MapView: View {
             Color.appBackground
                 .edgesIgnoringSafeArea(.all)
             
-            Map(position: .region($region), interactionModes: .all, showsUserLocation: true) {
+            Map(position: $region, interactionModes: .all, showsUserLocation: true) {
                 ForEach(annotationItems, id: \.id) { reading in
                     Annotation(coordinate: reading.location!) {
                         ReadingMapMarker(
