@@ -33,7 +33,7 @@ struct MapView: View {
             Color.appBackground
                 .edgesIgnoringSafeArea(.all)
             
-            Map(position: $cameraPosition, interactionModes: .all, showsUserLocation: true) {
+            Map(position: $cameraPosition, interactionModes: .all) {
                 ForEach(annotationItems, id: \.id) { reading in
                     Annotation(coordinate: reading.location!) {
                         ReadingMapMarker(
@@ -48,6 +48,7 @@ struct MapView: View {
                     }
                 }
             }
+            .mapShowsUserLocation(true)
         }
         .navigationTitle("Map")
         .toolbar {
