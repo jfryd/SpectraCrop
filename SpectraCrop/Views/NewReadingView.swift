@@ -18,43 +18,49 @@ struct NewReadingView: View {
     @State private var isShowingAutomatic = false
     
     var body: some View {
-        VStack(spacing: 20) {
-            // Bluetooth Device Section
-            BluetoothDeviceSection()
-                .environmentObject(bluetoothManager)
+        ZStack {
+            Color.appBackground
+                .edgesIgnoringSafeArea(.all)
             
-            // Location Section
-            LocationSection()
-                .environmentObject(locationManager)
-            
-            Spacer()
-            
-            // Action Buttons
-            VStack(spacing: 16) {
-                Button {
-                    HapticFeedback.light()
-                    isShowingManual = true
-                } label: {
-                    Label("Manual Entry", systemImage: "pencil")
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.borderedProminent)
-                .tint(.primaryBlue)
-                .controlSize(.large)
+            VStack(spacing: 20) {
+                // Bluetooth Device Section
+                BluetoothDeviceSection()
+                    .environmentObject(bluetoothManager)
+                    .glassCardStyle()
                 
-                Button {
-                    HapticFeedback.light()
-                    isShowingAutomatic = true
-                } label: {
-                    Label("From Device", systemImage: "antenna.radiowaves.left.and.right")
-                        .frame(maxWidth: .infinity)
+                // Location Section
+                LocationSection()
+                    .environmentObject(locationManager)
+                    .glassCardStyle()
+                
+                Spacer()
+                
+                // Action Buttons
+                VStack(spacing: 16) {
+                    Button {
+                        HapticFeedback.light()
+                        isShowingManual = true
+                    } label: {
+                        Label("Manual Entry", systemImage: "pencil")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(GlassPrimaryButtonStyle())
+                    .controlSize(.large)
+                    
+                    Button {
+                        HapticFeedback.light()
+                        isShowingAutomatic = true
+                    } label: {
+                        Label("From Device", systemImage: "antenna.radiowaves.left.and.right")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(GlassSecondaryButtonStyle())
+                    .controlSize(.large)
+                    .disabled(!bluetoothManager.isEnabled || bluetoothManager.connectedDevice == nil)
                 }
-                .buttonStyle(.bordered)
-                .tint(.primaryBlue)
-                .controlSize(.large)
-                .disabled(!bluetoothManager.isEnabled || bluetoothManager.connectedDevice == nil)
+                .padding(.horizontal)
+                .padding(.bottom, 40)
             }
-            .padding(.horizontal)
         }
         .navigationTitle("New Reading")
         .sheet(isPresented: $isShowingManual) {
@@ -334,6 +340,8 @@ struct NewManualReadingView: View {
                 if let errorMessage = errorMessage {
                     Text(errorMessage)
                         .foregroundColor(.primaryRed)
+                        .padding()
+                        .glassCardStyle()
                         .padding(.horizontal)
                 }
                 
@@ -341,13 +349,13 @@ struct NewManualReadingView: View {
                     saveReading()
                 }
                 .disabled(isSaving)
-                .buttonStyle(.borderedProminent)
-                .tint(.primaryBlue)
+                .buttonStyle(GlassPrimaryButtonStyle())
                 .padding(.horizontal)
-                .padding(.bottom, 20)
+                .padding(.bottom, 40)
                 
                 Spacer()
             }
+            .padding(.top, 20)
         }
         .navigationTitle("Manual Reading")
         .navigationBarTitleDisplayMode(.inline)

@@ -20,35 +20,45 @@ struct ReadingListView: View {
     @State private var sortOrder: ReadingSort = .dateNewest
     
     var body: some View {
-        List {
-            // Sync Section
-            if authManager.isLoggedIn {
-                SyncSection()
-            }
+        ZStack {
+            Color.appBackground
+                .edgesIgnoringSafeArea(.all)
             
-            // Readings List
-            ForEach(filteredReadings) { reading in
-                ReadingRowView(
-                    reading: reading,
-                    isSelected: selectedReadings.contains(reading.id)
-                )
-                .onTapGesture {
-                    HapticFeedback.selection()
-                    toggleSelection(for: reading)
+            List {
+                // Sync Section
+                if authManager.isLoggedIn {
+                    SyncSection()
+                        .glassCardStyle()
+                }
+                
+                // Readings List
+                ForEach(filteredReadings) { reading in
+                    ReadingRowView(
+                        reading: reading,
+                        isSelected: selectedReadings.contains(reading.id)
+                    )
+                    .onTapGesture {
+                        HapticFeedback.selection()
+                        toggleSelection(for: reading)
+                    }
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(.init(top: 8, leading: 16, bottom: 8, trailing: 16))
+                }
+                
+                // Load More
+                if dataManager.hasMore {
+                    ProgressView()
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .onAppear {
+                            Task {
+                                await dataManager.loadMoreReadings()
+                            }
+                        }
                 }
             }
-            
-            // Load More
-            if dataManager.hasMore {
-                ProgressView()
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .onAppear {
-                        Task {
-                            await dataManager.loadMoreReadings()
-                        }
-                    }
-            }
+            .listStyle(.plain)
+            .scrollContentBackground(.hidden)
         }
         .navigationTitle("Readings")
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
@@ -278,40 +288,45 @@ struct ReadingFilterView: View {
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 20) {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Sort By")
-                        .font(.headline)
-                        .padding(.horizontal)
-                    
-                    VStack(spacing: 4) {
-                        ForEach(ReadingSort.allCases) { order in
-                            Button {
-                                sortOrder = order
-                                dismiss()
-                            } label: {
-                                HStack {
-                                    Text(order.rawValue)
-                                    Spacer()
-                                    if sortOrder == order {
-                                        Image(systemName: "checkmark")
-                                            .foregroundColor(.primaryBlue)
+        ZStack {
+            Color.appBackground
+                .edgesIgnoringSafeArea(.all)
+            
+            ScrollView {
+                VStack(spacing: 20) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Sort By")
+                            .font(.headline)
+                            .padding(.horizontal)
+                        
+                        VStack(spacing: 4) {
+                            ForEach(ReadingSort.allCases) { order in
+                                Button {
+                                    sortOrder = order
+                                    HapticFeedback.selection()
+                                    dismiss()
+                                } label: {
+                                    HStack {
+                                        Text(order.rawValue)
+                                        Spacer()
+                                        if sortOrder == order {
+                                            Image(systemName: "checkmark")
+                                                .foregroundColor(.primaryBlue)
+                                        }
                                     }
+                                    .padding(.horizontal)
+                                    .padding(.vertical, 12)
+                                    .contentShape(Rectangle())
+                                    .glassCardStyle()
                                 }
-                                .padding(.horizontal)
-                                .padding(.vertical, 8)
-                                .contentShape(Rectangle())
+                                .buttonStyle(.plain)
                             }
-                            .buttonStyle(.plain)
-                            
-                            Divider()
-                                .padding(.horizontal)
                         }
                     }
+                    .padding(.top, 20)
+                    
+                    Spacer()
                 }
-                
-                Spacer()
             }
         }
         .navigationTitle("Sort & Filter")
@@ -319,6 +334,7 @@ struct ReadingFilterView: View {
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button("Cancel") {
+                    HapticFeedback.light()
                     dismiss()
                 }
             }

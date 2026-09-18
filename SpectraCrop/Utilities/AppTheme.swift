@@ -188,11 +188,18 @@ struct PrimaryButtonStyle: ButtonStyle {
         configuration.label
             .padding()
             .frame(maxWidth: .infinity)
-            .background(Color.primaryBlue)
+            .background(
+                LinearGradient(
+                    gradient: Gradient(colors: [Color.primaryBlue.opacity(0.2), Color.primaryBlue]),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            )
             .foregroundColor(.white)
-            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .shadow(color: Color.primaryBlue.opacity(0.3), radius: 10, x: 0, y: 4)
             .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
-            .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
+            .animation(.spring(response: 0.3, dampingFraction: 0.6), value: configuration.isPressed)
     }
 }
 
@@ -204,11 +211,55 @@ struct SecondaryButtonStyle: ButtonStyle {
             .background(Color.clear)
             .foregroundColor(Color.primaryBlue)
             .overlay(
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(Color.primaryBlue, lineWidth: 1)
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(Color.primaryBlue, lineWidth: 1.5)
             )
             .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
-            .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
+            .animation(.spring(response: 0.3, dampingFraction: 0.6), value: configuration.isPressed)
+    }
+}
+
+// MARK: - Liquid Glass Button Styles
+
+struct GlassPrimaryButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(.ultraThinMaterial)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(Color.white.opacity(0.3), lineWidth: 1)
+                    )
+                    .blur(radius: configuration.isPressed ? 2 : 0)
+            )
+            .foregroundColor(.white)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 4)
+            .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
+            .animation(.spring(response: 0.3, dampingFraction: 0.6), value: configuration.isPressed)
+    }
+}
+
+struct GlassSecondaryButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(.thinMaterial)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(Color.primaryBlue.opacity(0.5), lineWidth: 1)
+                    )
+            )
+            .foregroundColor(Color.primaryBlue)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
+            .animation(.spring(response: 0.3, dampingFraction: 0.6), value: configuration.isPressed)
     }
 }
 
@@ -243,5 +294,39 @@ extension View {
             .background(Color.cardBackground)
             .cornerRadius(12)
             .cardShadow()
+    }
+    
+    /// Applies liquid glass card styling with frosted glass effect
+    func glassCardStyle() -> some View {
+        self
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(.regularMaterial)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(Color.white.opacity(0.2), lineWidth: 1)
+                    )
+            )
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .prominentShadow()
+    }
+    
+    /// Applies liquid glass effect with blur
+    func glassMorphism() -> some View {
+        self
+            .background(.ultraThinMaterial)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(Color.white.opacity(0.2), lineWidth: 1)
+            )
+    }
+    
+    /// Adds a modern glow effect
+    func glowEffect(color: Color = .primaryBlue, radius: CGFloat = 10) -> some View {
+        self
+            .shadow(color: color.opacity(0.3), radius: radius, x: 0, y: 0)
+            .shadow(color: color.opacity(0.2), radius: radius * 2, x: 0, y: 0)
     }
 }
