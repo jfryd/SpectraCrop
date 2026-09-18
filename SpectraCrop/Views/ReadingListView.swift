@@ -247,7 +247,8 @@ struct ReadingRowView: View {
             // Selection indicator
             if isSelected {
                 Image(systemName: "checkmark.circle.fill")
-                    .foregroundColor(.blue)
+                    .foregroundColor(.primaryBlue)
+                    .glassMorphism()
             } else {
                 Image(systemName: "circle")
                     .foregroundColor(.clear)
@@ -272,12 +273,14 @@ struct ReadingRowView: View {
             Circle()
                 .fill(reading.qualityColor)
                 .frame(width: 20, height: 20)
+                .shadow(color: reading.qualityColor.opacity(0.3), radius: 5, x: 0, y: 0)
             
             // Sync status
             Image(systemName: reading.status == .synced ? "checkmark" : "clock")
                 .foregroundColor(reading.status == .synced ? .green : .gray)
         }
-        .padding(.vertical, 8)
+        .padding()
+        .glassCardStyle()
     }
 }
 

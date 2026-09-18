@@ -28,14 +28,21 @@ struct MapView: View {
     }
     
     var body: some View {
-        Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: true, annotationItems: annotationItems) { reading in
-            MapAnnotation(coordinate: reading.location!) {
-                ReadingMapMarker(
-                    reading: reading,
-                    isSelected: selectedReading?.id == reading.id
-                )
-                .onTapGesture {
-                    selectedReading = reading
+        ZStack {
+            Color.appBackground
+                .edgesIgnoringSafeArea(.all)
+            
+            Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: true, annotationItems: annotationItems) { reading in
+                MapAnnotation(coordinate: reading.location!) {
+                    ReadingMapMarker(
+                        reading: reading,
+                        isSelected: selectedReading?.id == reading.id
+                    )
+                    .glassCardStyle()
+                    .onTapGesture {
+                        HapticFeedback.selection()
+                        selectedReading = reading
+                    }
                 }
             }
         }
@@ -55,6 +62,8 @@ struct MapView: View {
                 } label: {
                     Image(systemName: "location.fill")
                         .foregroundColor(.primaryBlue)
+                        .glassMorphism()
+                        .padding(8)
                 }
             }
         }
@@ -118,31 +127,39 @@ struct ReadingDetailView: View {
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-                // Header
-                VStack(alignment: .leading) {
-                    Text(reading.dateString)
-                        .font(.title)
-                    
-                    if let description = reading.description {
-                        Text(description)
-                            .font(.title2)
-                            .foregroundColor(.secondary)
+        ZStack {
+            Color.appBackground
+                .edgesIgnoringSafeArea(.all)
+            
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    // Header
+                    VStack(alignment: .leading) {
+                        Text(reading.dateString)
+                            .font(.title)
+                        
+                        if let description = reading.description {
+                            Text(description)
+                                .font(.title2)
+                                .foregroundColor(.secondary)
+                        }
                     }
-                }
-                
-                // Quality Badge
-                HStack {
-                    Circle()
-                        .fill(reading.qualityColor)
-                        .frame(width: 20, height: 20)
+                    .glassCardStyle()
                     
-                    Text(reading.qualitySuccess ? "Good Quality" : "Poor Quality")
-                        .font(.subheadline)
-                }
-                
-                Divider()
+                    // Quality Badge
+                    HStack {
+                        Circle()
+                            .fill(reading.qualityColor)
+                            .frame(width: 20, height: 20)
+                            .shadow(color: reading.qualityColor.opacity(0.3), radius: 8, x: 0, y: 0)
+                        
+                        Text(reading.qualitySuccess ? "Good Quality" : "Poor Quality")
+                            .font(.subheadline)
+                    }
+                    .glassCardStyle()
+                    
+                    Divider()
+                        .padding(.horizontal)
                 
                 // Location
                 if let location = reading.location {
@@ -230,6 +247,7 @@ struct ReadingDetailView: View {
                 }
             }
         }
+        }
     }
     
     private func deleteReading() {
@@ -240,7 +258,7 @@ struct ReadingDetailView: View {
 
 // MARK: - SectionView
 
-private struct SectionView<Content: View>: View {
+struct SectionView<Content: View>: View {
     let title: String
     let content: Content
     
@@ -257,6 +275,7 @@ private struct SectionView<Content: View>: View {
             
             content
         }
+        .glassCardStyle()
     }
 }
 

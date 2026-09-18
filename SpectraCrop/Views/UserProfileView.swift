@@ -18,60 +18,80 @@ struct UserProfileView: View {
     @State private var isShowingDeleteAccountAlert = false
     
     var body: some View {
-        NavigationStack {
-            List {
-                // User Section
-                Section {
-                    if let user = authManager.currentUser {
-                        UserInfoView(user: user)
-                    }
-                }
-                
-                // Stats Section
-                StatsSection()
-                    .environmentObject(dataManager)
-                
-                // Actions Section
-                Section {
-                    Button {
-                        isShowingSettings = true
-                    } label: {
-                        Label("Settings", systemImage: "gear")
-                    }
-                    
-                    Button {
-                        Task {
-                            await dataManager.syncReadings()
+        ZStack {
+            Color.appBackground
+                .edgesIgnoringSafeArea(.all)
+            
+            NavigationStack {
+                List {
+                    // User Section
+                    Section {
+                        if let user = authManager.currentUser {
+                            UserInfoView(user: user)
+                                .glassCardStyle()
                         }
-                    } label: {
-                        Label("Sync Now", systemImage: "arrow.clockwise")
                     }
-                    .disabled(!authManager.isLoggedIn)
-                }
-                
-                // Sign Out Section
-                Section {
-                    Button(role: .destructive) {
-                        isShowingLogoutAlert = true
-                    } label: {
-                        Label("Sign Out", systemImage: "arrow.left.square")
-                    }
+                    .listRowBackground(Color.clear)
                     
-                    Button(role: .destructive) {
-                        isShowingDeleteAccountAlert = true
-                    } label: {
-                        Label("Delete Account", systemImage: "trash")
+                    // Stats Section
+                    StatsSection()
+                        .environmentObject(dataManager)
+                        .glassCardStyle()
+                    .listRowBackground(Color.clear)
+                    
+                    // Actions Section
+                    Section {
+                        Button {
+                            HapticFeedback.light()
+                            isShowingSettings = true
+                        } label: {
+                            Label("Settings", systemImage: "gear")
+                        }
+                        .buttonStyle(GlassSecondaryButtonStyle())
+                        
+                        Button {
+                            HapticFeedback.light()
+                            Task {
+                                await dataManager.syncReadings()
+                            }
+                        } label: {
+                            Label("Sync Now", systemImage: "arrow.clockwise")
+                        }
+                        .buttonStyle(GlassSecondaryButtonStyle())
+                        .disabled(!authManager.isLoggedIn)
+                    }
+                    .listRowBackground(Color.clear)
+                    
+                    // Sign Out Section
+                    Section {
+                        Button(role: .destructive) {
+                            HapticFeedback.light()
+                            isShowingLogoutAlert = true
+                        } label: {
+                            Label("Sign Out", systemImage: "arrow.left.square")
+                        }
+                        .buttonStyle(GlassSecondaryButtonStyle())
+                        
+                        Button(role: .destructive) {
+                            HapticFeedback.light()
+                            isShowingDeleteAccountAlert = true
+                        } label: {
+                            Label("Delete Account", systemImage: "trash")
+                        }
+                        .buttonStyle(GlassSecondaryButtonStyle())
+                    }
+                    .listRowBackground(Color.clear)
+                }
+                .listStyle(.plain)
+                .scrollContentBackground(.hidden)
+                .navigationTitle("Profile")
+                .navigationBarTitleDisplayMode(.inline)
+                .sheet(isPresented: $isShowingSettings) {
+                    NavigationStack {
+                        SettingsView()
+                            .environmentObject(authManager)
                     }
                 }
-            }
-            .navigationTitle("Profile")
-            .navigationBarTitleDisplayMode(.inline)
-            .sheet(isPresented: $isShowingSettings) {
-                NavigationStack {
-                    SettingsView()
-                        .environmentObject(authManager)
-                }
-            }
             .alert("Sign Out", isPresented: $isShowingLogoutAlert) {
                 Button("Cancel", role: .cancel) {}
                 Button("Sign Out", role: .destructive) {
@@ -91,6 +111,7 @@ struct UserProfileView: View {
                 Text("This will permanently delete your account and all your data. This cannot be undone.")
             }
         }
+    }
     }
 }
 
@@ -187,27 +208,39 @@ struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        List {
-            Section {
-                NavigationLink {
-                    PrivacyPolicyView()
-                } label: {
-                    Label("Privacy Policy", systemImage: "shield.fill")
-                }
-                
-                NavigationLink {
-                    AppInfoView()
-                } label: {
-                    Label("App Info", systemImage: "info.circle.fill")
+        ZStack {
+            Color.appBackground
+                .edgesIgnoringSafeArea(.all)
+            
+            List {
+                Section {
+                    NavigationLink {
+                        PrivacyPolicyView()
+                    } label: {
+                        Label("Privacy Policy", systemImage: "shield.fill")
+                    }
+                    .glassCardStyle()
+                    .listRowBackground(Color.clear)
+                    
+                    NavigationLink {
+                        AppInfoView()
+                    } label: {
+                        Label("App Info", systemImage: "info.circle.fill")
+                    }
+                    .glassCardStyle()
+                    .listRowBackground(Color.clear)
                 }
             }
-        }
-        .navigationTitle("Settings")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .cancellationAction) {
-                Button("Done") {
-                    dismiss()
+            .listStyle(.plain)
+            .scrollContentBackground(.hidden)
+            .navigationTitle("Settings")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Done") {
+                        HapticFeedback.light()
+                        dismiss()
+                    }
                 }
             }
         }
@@ -218,28 +251,36 @@ struct SettingsView: View {
 
 struct PrivacyPolicyView: View {
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading) {
-                Text("Privacy Policy")
-                    .font(.title)
-                    .padding(.bottom)
-                
-                Text("Last updated: August 31, 2026")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                    .padding(.bottom)
-                
-                // This would load from the PRIVACY_POLICY.md file
-                // or from a web view
-                Text("The privacy policy explains how we collect, use, and protect your data.")
-                    .font(.body)
-                
-                // In production, load from file or web
-                // Text(markdownContent)
-                // OR
-                // WebView(url: privacyPolicyURL)
+        ZStack {
+            Color.appBackground
+                .edgesIgnoringSafeArea(.all)
+            
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    Text("Privacy Policy")
+                        .font(.title)
+                        .padding(.bottom, 8)
+                    
+                    Text("Last updated: August 31, 2026")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                        .padding(.bottom)
+                    
+                    // This would load from the PRIVACY_POLICY.md file
+                    // or from a web view
+                    Text("The privacy policy explains how we collect, use, and protect your data.")
+                        .font(.body)
+                        .glassCardStyle()
+                    
+                    // In production, load from file or web
+                    // Text(markdownContent)
+                    // OR
+                    // WebView(url: privacyPolicyURL)
+                    
+                    Spacer()
+                }
+                .padding()
             }
-            .padding()
         }
         .navigationTitle("Privacy Policy")
         .navigationBarTitleDisplayMode(.inline)
