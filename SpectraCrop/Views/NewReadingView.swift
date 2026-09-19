@@ -18,49 +18,43 @@ struct NewReadingView: View {
     @State private var isShowingAutomatic = false
     
     var body: some View {
-        ZStack {
-            Color.appBackground
-                .edgesIgnoringSafeArea(.all)
+        VStack(spacing: 20) {
+            // Bluetooth Device Section
+            BluetoothDeviceSection()
+                .environmentObject(bluetoothManager)
             
-            VStack(spacing: 20) {
-                // Bluetooth Device Section
-                BluetoothDeviceSection()
-                    .environmentObject(bluetoothManager)
-                    .glassCardStyle()
-                
-                // Location Section
-                LocationSection()
-                    .environmentObject(locationManager)
-                    .glassCardStyle()
-                
-                Spacer()
-                
-                // Action Buttons
-                VStack(spacing: 16) {
-                    Button {
-                        HapticFeedback.light()
-                        isShowingManual = true
-                    } label: {
-                        Label("Manual Entry", systemImage: "pencil")
-                            .frame(maxWidth: .infinity)
-                    }
-                    .buttonStyle(GlassPrimaryButtonStyle())
-                    .controlSize(.large)
-                    
-                    Button {
-                        HapticFeedback.light()
-                        isShowingAutomatic = true
-                    } label: {
-                        Label("From Device", systemImage: "antenna.radiowaves.left.and.right")
-                            .frame(maxWidth: .infinity)
-                    }
-                    .buttonStyle(GlassSecondaryButtonStyle())
-                    .controlSize(.large)
-                    .disabled(!bluetoothManager.isEnabled || bluetoothManager.connectedDevice == nil)
+            // Location Section
+            LocationSection()
+                .environmentObject(locationManager)
+            
+            Spacer()
+            
+            // Action Buttons
+            VStack(spacing: 16) {
+                Button {
+                    HapticFeedback.light()
+                    isShowingManual = true
+                } label: {
+                    Label("Manual Entry", systemImage: "pencil")
+                        .frame(maxWidth: .infinity)
                 }
-                .padding(.horizontal)
-                .padding(.bottom, 40)
+                .buttonStyle(.borderedProminent)
+                .tint(.primaryBlue)
+                .controlSize(.large)
+                
+                Button {
+                    HapticFeedback.light()
+                    isShowingAutomatic = true
+                } label: {
+                    Label("From Device", systemImage: "antenna.radiowaves.left.and.right")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered)
+                .tint(.primaryBlue)
+                .controlSize(.large)
+                .disabled(!bluetoothManager.isEnabled || bluetoothManager.connectedDevice == nil)
             }
+            .padding(.horizontal)
         }
         .navigationTitle("New Reading")
         .sheet(isPresented: $isShowingManual) {
@@ -228,134 +222,82 @@ struct NewManualReadingView: View {
     @State private var errorMessage: String?
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 20) {
-                // Description Section
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Description")
-                        .font(.headline)
-                        .padding(.horizontal)
-                    
-                    TextField("Description (Optional)", text: $description)
-                        .textFieldStyle(.roundedBorder)
-                        .padding(.horizontal)
-                }
-                
-                // Location Section
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Location")
-                        .font(.headline)
-                        .padding(.horizontal)
-                    
-                    Toggle("Use Current Location", isOn: $useCurrentLocation)
-                        .padding(.horizontal)
-                        .onChange(of: useCurrentLocation) { _, newValue in
-                            if newValue {
-                                Task {
-                                    await locationManager.requestLocation()
-                                }
+        Form {
+            Section(header: Text("Description")) {
+                TextField("Description (Optional)", text: $description)
+            }
+            
+            Section(header: Text("Location")) {
+                Toggle("Use Current Location", isOn: $useCurrentLocation)
+                    .onChange(of: useCurrentLocation) { _, newValue in
+                        if newValue {
+                            Task {
+                                await locationManager.requestLocation()
                             }
-                        }
-                    
-                    if useCurrentLocation, let location = locationManager.currentLocation {
-                        VStack(alignment: .leading, spacing: 4) {
-                            HStack {
-                                Text("Latitude")
-                                Spacer()
-                                Text(String(format: "%.6f", location.latitude))
-                            }
-                            .padding(.horizontal)
-                            
-                            HStack {
-                                Text("Longitude")
-                                Spacer()
-                                Text(String(format: "%.6f", location.longitude))
-                            }
-                            .padding(.horizontal)
-                        }
-                    } else {
-                        VStack(alignment: .leading, spacing: 4) {
-                            TextField("Latitude", value: $latitude, format: .number)
-                                .keyboardType(.decimalPad)
-                                .textFieldStyle(.roundedBorder)
-                                .padding(.horizontal)
-                            
-                            TextField("Longitude", value: $longitude, format: .number)
-                                .keyboardType(.decimalPad)
-                                .textFieldStyle(.roundedBorder)
-                                .padding(.horizontal)
-                            
-                            TextField("Altitude", value: $altitude, format: .number)
-                                .keyboardType(.decimalPad)
-                                .textFieldStyle(.roundedBorder)
-                                .padding(.horizontal)
                         }
                     }
-                }
                 
-                // Spectral Data Section
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Spectral Data")
-                        .font(.headline)
-                        .padding(.horizontal)
-                    
-                    VStack(alignment: .leading, spacing: 4) {
-                        TextField("F0", text: $f0)
-                            .keyboardType(.numberPad)
-                            .textFieldStyle(.roundedBorder)
-                            .padding(.horizontal)
-                        
-                        TextField("FMax", text: $fMax)
-                            .keyboardType(.numberPad)
-                            .textFieldStyle(.roundedBorder)
-                            .padding(.horizontal)
-                        
-                        TextField("Time to FMax (ms)", text: $timeToFMax)
-                            .keyboardType(.numberPad)
-                            .textFieldStyle(.roundedBorder)
-                            .padding(.horizontal)
-                        
-                        TextField("Fv/FMax", text: $fvDivFMax)
-                            .keyboardType(.decimalPad)
-                            .textFieldStyle(.roundedBorder)
-                            .padding(.horizontal)
-                        
-                        TextField("Vj", text: $vj)
-                            .keyboardType(.decimalPad)
-                            .textFieldStyle(.roundedBorder)
-                            .padding(.horizontal)
-                        
-                        TextField("M0", text: $m0)
-                            .keyboardType(.decimalPad)
-                            .textFieldStyle(.roundedBorder)
-                            .padding(.horizontal)
-                        
-                        TextField("PI", text: $pi)
-                            .keyboardType(.decimalPad)
-                            .textFieldStyle(.roundedBorder)
-                            .padding(.horizontal)
+                if useCurrentLocation, let location = locationManager.currentLocation {
+                    HStack {
+                        Text("Latitude")
+                        Spacer()
+                        Text(String(format: "%.6f", location.latitude))
                     }
+                    
+                    HStack {
+                        Text("Longitude")
+                        Spacer()
+                        Text(String(format: "%.6f", location.longitude))
+                    }
+                } else {
+                    TextField("Latitude", value: $latitude, format: .number)
+                        .keyboardType(.decimalPad)
+                    
+                    TextField("Longitude", value: $longitude, format: .number)
+                        .keyboardType(.decimalPad)
+                    
+                    TextField("Altitude", value: $altitude, format: .number)
+                        .keyboardType(.decimalPad)
                 }
+            }
+            
+            Section(header: Text("Spectral Data")) {
+                TextField("F0", text: $f0)
+                    .keyboardType(.numberPad)
                 
-                if let errorMessage = errorMessage {
+                TextField("FMax", text: $fMax)
+                    .keyboardType(.numberPad)
+                
+                TextField("Time to FMax (ms)", text: $timeToFMax)
+                    .keyboardType(.numberPad)
+                
+                TextField("Fv/FMax", text: $fvDivFMax)
+                    .keyboardType(.decimalPad)
+                
+                TextField("Vj", text: $vj)
+                    .keyboardType(.decimalPad)
+                
+                TextField("M0", text: $m0)
+                    .keyboardType(.decimalPad)
+                
+                TextField("PI", text: $pi)
+                    .keyboardType(.decimalPad)
+            }
+            
+            if let errorMessage = errorMessage {
+                Section {
                     Text(errorMessage)
                         .foregroundColor(.primaryRed)
-                        .padding()
-                        .glassCardStyle()
-                        .padding(.horizontal)
                 }
-                
+            }
+            
+            Section {
                 Button("Save Reading") {
                     saveReading()
                 }
                 .disabled(isSaving)
-                .buttonStyle(GlassPrimaryButtonStyle())
-                .padding(.horizontal)
-                .padding(.bottom, 40)
-                
-                Spacer()
+                .frame(maxWidth: .infinity)
             }
-            .padding(.top, 20)
         }
         .navigationTitle("Manual Reading")
         .navigationBarTitleDisplayMode(.inline)
