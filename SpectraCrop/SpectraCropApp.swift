@@ -22,6 +22,7 @@ struct SpectraCropApp: App {
                 .environmentObject(dataManager)
                 .environmentObject(bluetoothManager)
                 .environmentObject(locationManager)
+                .ignoresSafeArea()
                 // Removed .preferredColorScheme(.light) to support Dark Mode
         }
     }
@@ -44,14 +45,21 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
     
     private func configureAppearance() {
-        // Navigation bar appearance - use system default for full-screen experience
-        // Removed custom opaque background to allow content to extend under nav bar
+        // Navigation bar appearance - use transparent background for full-screen experience
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.configureWithDefaultBackground()
+        navBarAppearance.backgroundColor = .clear
+        UINavigationBar.appearance().standardAppearance = navBarAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+        UINavigationBar.appearance().compactAppearance = navBarAppearance
         
-        // Tab bar appearance
+        // Tab bar appearance - use transparent background for full-screen experience
         let tabBarAppearance = UITabBarAppearance()
-        tabBarAppearance.configureWithOpaqueBackground()
-        tabBarAppearance.backgroundColor = .systemBackground
+        tabBarAppearance.configureWithDefaultBackground()
+        tabBarAppearance.backgroundColor = .clear
+        tabBarAppearance.backgroundEffect = .none
         UITabBar.appearance().standardAppearance = tabBarAppearance
+        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
         
         // Button appearance
         UIButton.appearance().tintColor = .systemBlue

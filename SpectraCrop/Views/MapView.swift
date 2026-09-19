@@ -14,28 +14,38 @@ struct MapView: View {
     @EnvironmentObject var dataManager: DataManager
     @EnvironmentObject var locationManager: LocationManager
     
-    @State private var region: MKCoordinateRegion
+    @State private var cameraPosition: MapCameraPosition
     @State private var selectedReading: Reading?
     
     init() {
         // Default to a reasonable region
         let center = CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)
-        _region = State(initialValue: MKCoordinateRegion(
+        let region = MKCoordinateRegion(
             center: center,
             latitudinalMeters: 1000,
             longitudinalMeters: 1000
-        ))
+        )
+        _cameraPosition = State(initialValue: .region(region))
     }
     
     var body: some View {
-        Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: true, annotationItems: annotationItems) { reading in
-            MapAnnotation(coordinate: reading.location!) {
-                ReadingMapMarker(
-                    reading: reading,
-                    isSelected: selectedReading?.id == reading.id
-                )
-                .onTapGesture {
-                    selectedReading = reading
+        ZStack {
+            Color.appBackground
+                .edgesIgnoringSafeArea(.all)
+            
+            Map(position: $cameraPosition, interactionModes: .all) {
+                ForEach(annotationItems, id: \.id) { reading in
+                    Annotation(reading.id.uuidString, coordinate: reading.location!) {
+                        ReadingMapMarker(
+                            reading: reading,
+                            isSelected: selectedReading?.id == reading.id
+                        )
+                        .glassCardStyle()
+                        .onTapGesture {
+                            HapticFeedback.selection()
+                            selectedReading = reading
+                        }
+                    }
                 }
             }
         }
@@ -46,26 +56,30 @@ struct MapView: View {
                     HapticFeedback.light()
                     // Center on user location
                     if let userLocation = locationManager.currentLocation {
-                        region = MKCoordinateRegion(
+                        let region = MKCoordinateRegion(
                             center: userLocation,
                             latitudinalMeters: 1000,
                             longitudinalMeters: 1000
                         )
+                        cameraPosition = .region(region)
                     }
                 } label: {
                     Image(systemName: "location.fill")
                         .foregroundColor(.primaryBlue)
+                        .glassMorphism()
+                        .padding(8)
                 }
             }
         }
         .onAppear {
             // Try to center on user location
             if let userLocation = locationManager.currentLocation {
-                region = MKCoordinateRegion(
+                let region = MKCoordinateRegion(
                     center: userLocation,
                     latitudinalMeters: 1000,
                     longitudinalMeters: 1000
                 )
+                cameraPosition = .region(region)
             }
         }
         .sheet(item: $selectedReading) { reading in

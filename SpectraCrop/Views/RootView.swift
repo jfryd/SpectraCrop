@@ -74,6 +74,7 @@ struct MainTabView: View {
             }
         }
         .tint(Color.primaryBlue)
+        .edgesIgnoringSafeArea(.all)
         .onAppear {
             // Start Bluetooth scan when app becomes active
             if authManager.isLoggedIn {
